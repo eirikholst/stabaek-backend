@@ -1,0 +1,5 @@
+applications:
+- name: stabaek
+  memory: 1024M
+  path: ./target/stabaek-backend-0.0.1-SNAPSHOT.jar
+  services:

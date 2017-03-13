@@ -1,0 +1,23 @@
+language: java
+jdk:
+- oraclejdk8
+install:
+- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script:
+- mvn test
+cache:
+  directories:
+  - "$HOME/.m2"
+notifications:
+  email: false
+deploy:
+  edge: true
+  provider: cloudfoundry
+  api: https://api.run.pivotal.io
+  username: eirik.holst@bouvet.no
+  organization: stabaek
+  space: development
+  on:
+    branch: master
+  password:
+    secure: BKIGR1aWsxoBXHb0lqTdAmtlfpGM24Rad0sswRIwGrTmj9RTBVbFpOxtAdHMc2yHKCcbpcYqkiBirPgJWvAHiCQG9pX/Q/sNTtfpuHbpa/IjbgBJ5fCKeG4EevFILvRMKwJ2mJXEFi2H5OrpwRqZtA1cOFyShvdgBt62swg0b6nLnrWqbOCkOP6J1ecs93eHHic401lLL6OP5D1uZODEEZTKynCoTHgnSKtA8cg1yABqD9fEiPcWC2BwobxJIreMRxKnMyorl4TerDiII1wKuXbCUCgDGkdTIb3YYoUBKAtJNzGrDBzEgCssH8Z3Mijc8+BD5GO98oiDfnPWRtNQ/8bg28IF5fiik6EMReKtNkJ8dm/Pdp8RErV73PhY8j/48VnFApC8i6IvKLs7pmpChOCW+i3ihYGoyz2Go92mrtFADbNuGr5Trmdb/t89xT2/qs/J4VLRXncp8qYRZ5WH+cxuvnogOPiFCTDPBXsxV9q0xEyGtzpbflV/hQMzBBrgTBW93ATOwM1WJmhD4MoY3OYIr89oT6M2mKHBQfEGD+qUnZQUuoK0iJeXKzlakaJoqntAsszk9ti/l5DapEJil0o9FWPsir7IveMBlmiKqkM6o5CkZqF2CUL23cKlt1s/KuqpbRkcmYnCQ7T66nRvtoPAS/2erbWiifN0j7Bk7Rw=
