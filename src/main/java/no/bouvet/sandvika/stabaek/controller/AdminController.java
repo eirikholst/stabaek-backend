@@ -12,6 +12,7 @@ import no.bouvet.sandvika.stabaek.utils.NifsMatchTranslator;
 import no.bouvet.sandvika.stabaek.utils.NifsStadiumTranslator;
 import no.bouvet.sandvika.stabaek.utils.NifsTeamTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -28,6 +29,7 @@ public class AdminController {
     public AdminController() {
     }
 
+    @CrossOrigin
     @RequestMapping({"/admin/init"})
     public void init() {
         this.InitTeams();
