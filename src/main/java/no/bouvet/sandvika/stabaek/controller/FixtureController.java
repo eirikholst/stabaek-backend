@@ -40,4 +40,10 @@ public class FixtureController {
     public List<Fixture> getFixturesByStadium(@PathVariable("stadium") String stadium) {
         return this.fixtureService.getFixturesByStadium(stadium);
     }
+
+    @CrossOrigin
+    @RequestMapping({"/fixtures/findByTeam={team}"})
+    public List<Fixture> getFixtureByTeam(@PathVariable("team") String team){
+        return this.fixtureService.getFixturesByTeam(team);
+    }
 }

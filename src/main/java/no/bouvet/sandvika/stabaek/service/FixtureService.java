@@ -37,4 +37,10 @@ public class FixtureService {
     public List<Fixture> getFixturesByStadium(String stadium) {
         return this.fixtureRepository.findByStadiumName(stadium);
     }
+
+    public List<Fixture> getFixturesByTeam(String team) {
+        List<Fixture> fixtures = getFixturesByHomeTeam(team);
+        fixtures.addAll(getFixturesByAwayTeam(team));
+        return fixtures;
+    }
 }
