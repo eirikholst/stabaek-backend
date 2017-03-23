@@ -5,6 +5,7 @@ import no.bouvet.sandvika.stabaek.domain.Team;
 import no.bouvet.sandvika.stabaek.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +21,11 @@ public class TeamController {
     @RequestMapping({"/teams"})
     public List<Team> getAllTeams() {
         return this.teamService.getAllTeams();
+    }
+
+    @CrossOrigin
+    @RequestMapping({"/teams/{id}}"})
+    public Team getTeam(@PathVariable("id") String id) {
+        return this.teamService.getTeam(id);
     }
 }

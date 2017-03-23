@@ -25,4 +25,8 @@ public class TeamService {
     public void addTeam(Team team) {
         this.teamRepository.save(team);
     }
+
+    public Team getTeam(String id) {
+        return teamRepository.findOne(id);
+    }
 }
