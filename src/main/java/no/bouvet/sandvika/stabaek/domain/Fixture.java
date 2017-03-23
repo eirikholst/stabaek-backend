@@ -1,9 +1,12 @@
 package no.bouvet.sandvika.stabaek.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,20 +16,38 @@ public class Fixture {
     private String id;
     @ManyToOne
     @JsonBackReference
+    @Column(name="homeTeam")
     private Team homeTeam;
     @ManyToOne
     @JsonBackReference
+    @Column(name="awayTeam")
     private Team awayTeam;
     @ManyToOne
     @JsonBackReference
+    @Column(name="stadium")
     private Stadium stadium;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
     private String homeTeamNameString;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
     private String homeTeamId;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
     private String awayTeamId;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
     private String awayTeamNameString;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
     private String stadiumNameString;
+    @Column(name = "Date")
     private Date date;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
     private String readableDate;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
     private String name;
 
     public Fixture() {
