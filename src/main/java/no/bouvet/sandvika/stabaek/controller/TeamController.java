@@ -24,7 +24,7 @@ public class TeamController {
     }
 
     @CrossOrigin
-    @RequestMapping({"/teams/{id}}"})
+    @RequestMapping({"/teams/{id}"})
     public Team getTeam(@PathVariable("id") String id) {
         return this.teamService.getTeam(id);
     }
