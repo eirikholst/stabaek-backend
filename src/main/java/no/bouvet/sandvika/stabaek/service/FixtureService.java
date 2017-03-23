@@ -43,4 +43,8 @@ public class FixtureService {
         fixtures.addAll(getFixturesByAwayTeam(team));
         return fixtures;
     }
+
+    public Fixture getFixture(String id) {
+        return fixtureRepository.findOne(id);
+    }
 }

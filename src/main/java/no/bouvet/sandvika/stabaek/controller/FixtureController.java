@@ -46,4 +46,10 @@ public class FixtureController {
     public List<Fixture> getFixtureByTeam(@PathVariable("team") String team){
         return this.fixtureService.getFixturesByTeam(team);
     }
+
+    @CrossOrigin
+    @RequestMapping({"/fixtures/{id}"})
+    public Fixture getFixture(@PathVariable("id") String id){
+        return this.fixtureService.getFixture(id);
+    }
 }
