@@ -16,15 +16,12 @@ public class Fixture {
     private String id;
     @ManyToOne
     @JsonBackReference
-    @Column(name="homeTeam")
     private Team homeTeam;
     @ManyToOne
     @JsonBackReference
-    @Column(name="awayTeam")
     private Team awayTeam;
     @ManyToOne
     @JsonBackReference
-    @Column(name="stadium")
     private Stadium stadium;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
@@ -50,6 +47,7 @@ public class Fixture {
     @Transient
     private String name;
 
+
     public Fixture() {
     }
 
@@ -59,8 +57,9 @@ public class Fixture {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
         readableDate = sdf.format(date);
         this.homeTeam = new Team(homeTeamId, "");
-        this.awayTeam = new Team(awayTeamId, "");
+        this.awayTeam = new Team(awayTeamId, "" );
         this.stadium = new Stadium(stadiumId, "", id);
+
     }
 
     public String getId() {

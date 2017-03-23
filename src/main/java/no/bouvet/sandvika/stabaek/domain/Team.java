@@ -2,12 +2,9 @@ package no.bouvet.sandvika.stabaek.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import no.bouvet.sandvika.stabaek.domain.Fixture;
 import no.bouvet.sandvika.stabaek.domain.Stadium;
@@ -34,6 +31,10 @@ public class Team {
     )
     @JsonManagedReference
     private List<Fixture> awayFixtures;
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
+    @OrderColumn()
+    private List<Player> players;
 
     public Team() {
     }
@@ -41,6 +42,14 @@ public class Team {
     public Team(String id, String name) {
         this.id = id;
         this.name = name;
+
+//        List<Player> playerList = new ArrayList<>();
+//        for(String playerId : playerIds)
+//            playerList.add(new Player(playerId, "", "", "", ""));
+//        players = new Player[playerIds.length];
+//        for(int i = 0; i < playerIds.length; i++){
+//            players[i] = playerList.get(i);
+//        }
     }
 
     public String getId() {
@@ -106,5 +115,13 @@ public class Team {
 
     public String toString() {
         return this.name;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 }
