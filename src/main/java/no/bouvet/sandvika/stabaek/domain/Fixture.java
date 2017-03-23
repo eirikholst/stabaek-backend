@@ -21,6 +21,8 @@ public class Fixture {
     @JsonBackReference
     private Stadium stadium;
     private String homeTeamNameString;
+    private String homeTeamId;
+    private String awayTeamId;
     private String awayTeamNameString;
     private String stadiumNameString;
     private Date date;
@@ -38,7 +40,6 @@ public class Fixture {
         this.homeTeam = new Team(homeTeamId, "");
         this.awayTeam = new Team(awayTeamId, "");
         this.stadium = new Stadium(stadiumId, "", id);
-        this.name = this.getHomeTeamNameString() + " - " + this.getAwayTeamNameString();
     }
 
     public String getId() {
@@ -55,18 +56,19 @@ public class Fixture {
 
     public void setHomeTeam(Team homeTeam) {
         this.homeTeam = homeTeam;
-        if(homeTeam != null && homeTeam.getName() != null) {
-            this.homeTeamNameString = homeTeam.getName();
-        }
-
+        if(homeTeam == null) return;
+        this.homeTeamNameString = homeTeam.getName();
+        this.homeTeamId = homeTeam.getId();
     }
-
     public Team getAwayTeam() {
         return this.awayTeam;
     }
 
     public void setAwayTeam(Team awayTeam) {
         this.awayTeam = awayTeam;
+        if(awayTeam == null) return;
+        this.awayTeamNameString = awayTeam.getName();
+        this.awayTeamId = awayTeam.getId();
     }
 
     public String getHomeTeamNameString() {
@@ -106,10 +108,14 @@ public class Fixture {
     }
 
     public String getName() {
-        return name;
+        return this.getHomeTeamNameString() + " - " + this.getAwayTeamNameString();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getAwayTeamId() {
+        return awayTeamId;
+    }
+
+    public String getHomeTeamId() {
+        return homeTeamId;
     }
 }
