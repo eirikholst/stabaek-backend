@@ -25,7 +25,6 @@ public class Fixture {
     private String stadiumNameString;
     private Date date;
     private String readableDate;
-    private String name;
 
     public Fixture() {
     }
@@ -38,7 +37,6 @@ public class Fixture {
         this.homeTeam = new Team(homeTeamId, "");
         this.awayTeam = new Team(awayTeamId, "");
         this.stadium = new Stadium(stadiumId, "", id);
-        this.name = homeTeam.getName() + " - " + awayTeam.getName();
     }
 
     public String getId() {
@@ -103,13 +101,5 @@ public class Fixture {
 
     public void setReadableDate(String readableDate) {
         this.readableDate = readableDate;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
