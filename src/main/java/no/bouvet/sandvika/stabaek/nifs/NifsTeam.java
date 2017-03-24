@@ -27,6 +27,7 @@ public class NifsTeam {
     private NifsPerson[] staff;
     private boolean isYouthTeam;
     private boolean active;
+    private int shirtNumber;
 
     public NifsTeam() {
     }
@@ -213,5 +214,13 @@ public class NifsTeam {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public int getShirtNumber() {
+        return shirtNumber;
+    }
+
+    public void setShirtNumber(int shirtNumber) {
+        this.shirtNumber = shirtNumber;
     }
 }

@@ -13,6 +13,7 @@ public class Player {
     private String firstName;
     private String lastName;
     private String position;
+    private int number;
     @ManyToOne
     @JsonBackReference
     private Team team;
@@ -20,12 +21,13 @@ public class Player {
 
     public Player(){}
 
-    public Player(String id, String firstName, String lastName, String position, String teamId) {
+    public Player(String id, String firstName, String lastName, String position, String teamId, int number) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
         this.team = new Team(teamId, "");
+        this.number = number;
     }
 
     public String getId() {
@@ -71,5 +73,13 @@ public class Player {
     public String getTeamName() {
         if(team == null) return "";
         return team.getName();
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }

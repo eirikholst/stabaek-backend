@@ -15,22 +15,20 @@ public class NifsPlayerTranslator {
 
         String position = nifsPerson.getPosition() != null ? nifsPerson.getPosition().getPosition() : "";
 
-        String clubTeamId = getClubTeamId(nifsPerson, teamIdsInEliteserien);
-        if(clubTeamId == null) return null;
+        NifsTeam clubTeam = getClubTeam(nifsPerson, teamIdsInEliteserien);
+        if(clubTeam == null) return null;
 
-        return new Player(nifsPerson.getUid(), nifsPerson.getFirstName(), nifsPerson.getLastName(), position, clubTeamId);
+        return new Player(nifsPerson.getUid(), nifsPerson.getFirstName(), nifsPerson.getLastName(), position, Integer.toString(clubTeam.getId()), clubTeam.getShirtNumber());
     }
 
-    private static String getClubTeamId(NifsPerson nifsPerson, List<String> teamIdsInEliteserien) {
+    private static NifsTeam getClubTeam(NifsPerson nifsPerson, List<String> teamIdsInEliteserien) {
         NifsTeam[] teams = nifsPerson.getTeams();
         if(teams == null) return null;
 
         return Arrays.stream(teams)
                 .filter(NifsTeam::isActive)
-                .map(NifsTeam::getId)
                 .filter(Objects::nonNull)
-                .map(teamIdSInt -> Integer.toString(teamIdSInt))
-                .filter(teamIdsInEliteserien::contains)
+                .filter(nifsTeam -> teamIdsInEliteserien.contains(Integer.toString(nifsTeam.getId())))
                 .filter(Objects::nonNull)
                 .findFirst()
                 .orElse(null);
