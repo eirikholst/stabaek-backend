@@ -16,6 +16,7 @@ public class PlayerController {
     @Autowired
     private PlayerService playerService;
 
+
     @CrossOrigin
     @RequestMapping("/players")
     public List<Player> getAllPlayers(){
@@ -25,6 +26,18 @@ public class PlayerController {
     @CrossOrigin
     @RequestMapping("/players/{id}")
     public Player getPlayer(@PathVariable(name = "id") String id){
+        return playerService.getPlayer(id);
+    }
+
+    @CrossOrigin
+    @RequestMapping("/teams/{id}/players")
+    public List<Player> getPlayersFromTeam(@PathVariable(name = "id") String id){
+        return playerService.getPlayersFromTeam(id);
+    }
+
+    @CrossOrigin
+    @RequestMapping("/teams/{teamId}/players/{playerId}")
+    public Player getPlayerFromTeam(@PathVariable(name = "playerId") String id){
         return playerService.getPlayer(id);
     }
 }

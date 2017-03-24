@@ -1,7 +1,9 @@
 package no.bouvet.sandvika.stabaek.service;
 
 import no.bouvet.sandvika.stabaek.domain.Player;
+import no.bouvet.sandvika.stabaek.domain.Team;
 import no.bouvet.sandvika.stabaek.repository.PlayerRepository;
+import no.bouvet.sandvika.stabaek.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ public class PlayerService  {
 
     @Autowired
     private PlayerRepository playerRepository;
+    @Autowired
+    private TeamRepository teamRepository;
 
     public List<Player> getAllPlayers(){
         List<Player> players = new ArrayList<>();
@@ -27,5 +31,10 @@ public class PlayerService  {
 
     public Player getPlayer(String id) {
         return playerRepository.findOne(id);
+    }
+
+    public List<Player> getPlayersFromTeam(String id) {
+        Team team = teamRepository.findOne(id);
+        return team.getPlayers();
     }
 }
