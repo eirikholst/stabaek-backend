@@ -24,4 +24,8 @@ public class PlayerService  {
     public void addPlayer(Player player) {
         this.playerRepository.save(player);
     }
+
+    public Player getPlayer(String id) {
+        return playerRepository.findOne(id);
+    }
 }

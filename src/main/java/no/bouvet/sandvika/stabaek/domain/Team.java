@@ -31,9 +31,11 @@ public class Team {
     )
     @JsonManagedReference
     private List<Fixture> awayFixtures;
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy = "team"
+    )
     @JsonManagedReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
-    @OrderColumn()
     private List<Player> players;
 
     public Team() {

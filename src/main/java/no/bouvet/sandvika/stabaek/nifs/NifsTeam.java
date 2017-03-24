@@ -26,6 +26,7 @@ public class NifsTeam {
     private NifsPerson[] players;
     private NifsPerson[] staff;
     private boolean isYouthTeam;
+    private boolean active;
 
     public NifsTeam() {
     }
@@ -204,5 +205,13 @@ public class NifsTeam {
 
     public void setYouthTeam(boolean youthTeam) {
         isYouthTeam = youthTeam;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

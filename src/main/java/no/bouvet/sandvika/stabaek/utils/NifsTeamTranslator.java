@@ -14,14 +14,10 @@ public class NifsTeamTranslator {
     }
 
     public static Team getTeam(NifsTeam nifsTeam) {
-        String[] playerIds = new String[nifsTeam.getPlayers().length];
-        for (int i = 0; i < nifsTeam.getPlayers().length; i++)
-            playerIds[i] = Integer.toString(nifsTeam.getPlayers()[i].getId());
-
-        return new Team(nifsTeam.getUid(), nifsTeam.getName());
+        return new Team(Integer.toString(nifsTeam.getId()), nifsTeam.getName());
     }
 
-    public static List<Team> getTeams(NifsTeam[] nifsTeam) {
-        return Arrays.stream(nifsTeam).map((t) -> getTeam(t)).collect(Collectors.toList());
+    public static List<Team> getTeams(List<NifsTeam> nifsTeam) {
+        return nifsTeam.stream().map(NifsTeamTranslator::getTeam).collect(Collectors.toList());
     }
 }

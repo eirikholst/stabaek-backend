@@ -16,6 +16,7 @@ public class Player {
     @ManyToOne
     @JsonBackReference
     private Team team;
+    private String teamName;
 
     public Player(){}
 
@@ -65,5 +66,10 @@ public class Player {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public String getTeamName() {
+        if(team == null) return "";
+        return team.getName();
     }
 }

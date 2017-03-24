@@ -4,6 +4,7 @@ import no.bouvet.sandvika.stabaek.domain.Player;
 import no.bouvet.sandvika.stabaek.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,5 +20,11 @@ public class PlayerController {
     @RequestMapping("/players")
     public List<Player> getAllPlayers(){
         return playerService.getAllPlayers();
+    }
+
+    @CrossOrigin
+    @RequestMapping("/players/{id}")
+    public Player getPlayer(@PathVariable(name = "id") String id){
+        return playerService.getPlayer(id);
     }
 }

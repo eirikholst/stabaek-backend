@@ -6,7 +6,7 @@ public class NifsTransfer {
     private String type;
     private int id;
     private String uid;
-    private Date date;
+    private String date;
     private NifsTeam fromTeam;
     private NifsTeam toTeam;
     private NifsPerson person;
@@ -38,11 +38,11 @@ public class NifsTransfer {
         this.uid = uid;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

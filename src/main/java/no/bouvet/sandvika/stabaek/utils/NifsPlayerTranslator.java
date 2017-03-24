@@ -4,32 +4,35 @@ import no.bouvet.sandvika.stabaek.domain.Player;
 import no.bouvet.sandvika.stabaek.nifs.NifsPerson;
 import no.bouvet.sandvika.stabaek.nifs.NifsTeam;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class NifsPlayerTranslator {
 
-    public static List<Player> getPlayers(NifsTeam nifsTeam){
-        List<Player> players = new ArrayList<>();
-        for (NifsPerson nifsPerson : nifsTeam.getPlayers())
-            players.add(getPlayer(nifsPerson));
-        return players;
-    }
+    public static Player getPlayer(NifsPerson nifsPerson, List<String> teamIdsInEliteserien) {
+        if (nifsPerson == null) return null;
 
-    public static Player getPlayer(NifsPerson nifsPerson) {
-        if(nifsPerson == null) return null;
         String position = nifsPerson.getPosition() != null ? nifsPerson.getPosition().getPosition() : "";
-        String teamId = (nifsPerson.getTeams().length > 0 && nifsPerson.getTeams()[0] != null) ? Integer.toString(nifsPerson.getTeams()[0].getId()) : "";
-        return new Player(nifsPerson.getUid(), nifsPerson.getFirstName(), nifsPerson.getLastName(), position, teamId);
+
+        String clubTeamId = getClubTeamId(nifsPerson, teamIdsInEliteserien);
+        if(clubTeamId == null) return null;
+
+        return new Player(nifsPerson.getUid(), nifsPerson.getFirstName(), nifsPerson.getLastName(), position, clubTeamId);
     }
 
-    public static List<Player> getPlayers(NifsTeam[] nifsTeams) {
-        return Arrays.stream(nifsTeams)
-                .map(NifsPlayerTranslator::getPlayers)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
+    private static String getClubTeamId(NifsPerson nifsPerson, List<String> teamIdsInEliteserien) {
+        NifsTeam[] teams = nifsPerson.getTeams();
+        if(teams == null) return null;
+
+        return Arrays.stream(teams)
+                .filter(NifsTeam::isActive)
+                .map(NifsTeam::getId)
+                .filter(Objects::nonNull)
+                .map(teamIdSInt -> Integer.toString(teamIdSInt))
+                .filter(teamIdsInEliteserien::contains)
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
     }
 }
