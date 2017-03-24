@@ -14,35 +14,40 @@ import java.util.Date;
 public class Fixture {
     @Id
     private String id;
+
     @ManyToOne
     @JsonBackReference
     private Team homeTeam;
+
     @ManyToOne
     @JsonBackReference
     private Team awayTeam;
+
     @ManyToOne
     @JsonBackReference
     private Stadium stadium;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
     private String homeTeamNameString;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Transient
-    private String homeTeamId;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Transient
-    private String awayTeamId;
+
+    private String homeTeamIdString;
+
+    private String awayTeamIdString;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
     private String awayTeamNameString;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Transient
+
     private String stadiumNameString;
+
     @Column(name = "Date")
     private Date date;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
     private String readableDate;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
     private String name;
@@ -54,8 +59,6 @@ public class Fixture {
     public Fixture(String id, Date date, String homeTeamId, String awayTeamId, String stadiumId){
         this.id = id;
         this.date = date;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
-        readableDate = sdf.format(date);
         this.homeTeam = new Team(homeTeamId, "");
         this.awayTeam = new Team(awayTeamId, "" );
         this.stadium = new Stadium(stadiumId, "", id);
@@ -76,31 +79,26 @@ public class Fixture {
 
     public void setHomeTeam(Team homeTeam) {
         this.homeTeam = homeTeam;
-        if(homeTeam == null) return;
-        this.homeTeamNameString = homeTeam.getName();
-        this.homeTeamId = homeTeam.getId();
     }
+
     public Team getAwayTeam() {
         return this.awayTeam;
     }
 
     public void setAwayTeam(Team awayTeam) {
         this.awayTeam = awayTeam;
-        if(awayTeam == null) return;
-        this.awayTeamNameString = awayTeam.getName();
-        this.awayTeamId = awayTeam.getId();
     }
 
     public String getHomeTeamNameString() {
-        return this.homeTeam != null?this.homeTeam.getName():null;
+        return this.homeTeam != null ? this.homeTeam.getName() : null;
     }
 
     public String getAwayTeamNameString() {
-        return this.awayTeam != null?this.awayTeam.getName():null;
+        return this.awayTeam != null ? this.awayTeam.getName() : null;
     }
 
     public String getStadiumNameString() {
-        return this.homeTeam != null?(this.homeTeam.getStadium() != null?this.homeTeam.getStadium().getName():null):null;
+        return this.stadium != null ? this.stadium.getName() : null;
     }
 
     public Stadium getStadium() {
@@ -120,11 +118,9 @@ public class Fixture {
     }
 
     public String getReadableDate() {
-        return readableDate;
-    }
-
-    public void setReadableDate(String readableDate) {
-        this.readableDate = readableDate;
+        if(this.date == null) return null;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
+        return sdf.format(this.date);
     }
 
     public String getName() {
@@ -132,10 +128,10 @@ public class Fixture {
     }
 
     public String getAwayTeamId() {
-        return awayTeamId;
+        return this.awayTeam != null ? this.awayTeam.getId() : null;
     }
 
     public String getHomeTeamId() {
-        return homeTeamId;
+        return this.homeTeam != null ? this.homeTeam.getId() : null;
     }
 }
