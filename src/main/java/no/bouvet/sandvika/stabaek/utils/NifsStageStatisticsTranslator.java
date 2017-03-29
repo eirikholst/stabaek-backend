@@ -16,7 +16,7 @@ public class NifsStageStatisticsTranslator {
                 playerId,
                 nifsStage.getFullName(),
                 Integer.toString(nifsStage.getId()),
-                nifsStage.getName(),
+                nifsTeam.getName(),
                 Integer.toString(nifsTeam.getId()),
                 nifsStageStatistics.getGoals(),
                 nifsStageStatistics.getAssists(),
