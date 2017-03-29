@@ -25,9 +25,11 @@ public class NifsPerson {
     private NifsPlace birthPlace;
     private NifsTeam[] teams;
     private NifsTransfer[] transfers;
-    private NifsStageStatistics[] stageStatisticss;
+    private NifsStageStatistics[] stageStatistics;
     private NifsImage profilePicture;
     private NifsKit kit;
+    private boolean startsMatch;
+    private boolean startsOnTheBench;
 
     public NifsPerson() {
     }
@@ -208,12 +210,12 @@ public class NifsPerson {
         this.transfers = transfers;
     }
 
-    public NifsStageStatistics[] getStageStatisticss() {
-        return stageStatisticss;
+    public NifsStageStatistics[] getStageStatistics() {
+        return stageStatistics;
     }
 
-    public void setStageStatisticss(NifsStageStatistics[] stageStatisticss) {
-        this.stageStatisticss = stageStatisticss;
+    public void setStageStatistics(NifsStageStatistics[] stageStatistics) {
+        this.stageStatistics = stageStatistics;
     }
 
     public NifsImage getProfilePicture() {
@@ -230,5 +232,21 @@ public class NifsPerson {
 
     public void setKit(NifsKit kit) {
         this.kit = kit;
+    }
+
+    public boolean isStartsMatch() {
+        return startsMatch;
+    }
+
+    public void setStartsMatch(boolean startsMatch) {
+        this.startsMatch = startsMatch;
+    }
+
+    public boolean isStartsOnTheBench() {
+        return startsOnTheBench;
+    }
+
+    public void setStartsOnTheBench(boolean startsOnTheBench) {
+        this.startsOnTheBench = startsOnTheBench;
     }
 }

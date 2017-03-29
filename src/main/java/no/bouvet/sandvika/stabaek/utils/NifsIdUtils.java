@@ -25,7 +25,10 @@ public class NifsIdUtils {
     }
 
     private static String getNonCompactIdOfThreeSegments(String[] stringSegments) {
-        return stringSegments.length != 3?null:(!stringSegments[1].equals("c") ? null : stringSegments[2]);
+        if(stringSegments.length != 3) return null;
+        if(stringSegments[0].equals("tim")) return stringSegments[1];
+        if(stringSegments[1].equals("c")) return stringSegments[2];
+        return null;
     }
 
     private static String getNonCompactIdOfFourSegments(String[] stringSegments) {

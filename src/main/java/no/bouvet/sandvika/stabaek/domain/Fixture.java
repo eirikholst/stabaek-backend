@@ -3,12 +3,10 @@ package no.bouvet.sandvika.stabaek.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @javax.persistence.Entity
 public class Fixture {
@@ -52,8 +50,21 @@ public class Fixture {
     @Transient
     private String name;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
+    private List<Player> homeStartXI;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Transient
+    private List<Player> awayStartXI;
 
     public Fixture() {
+    }
+
+    public Fixture(String id, Date date, String homeTeamId, String awayTeamId, String stadiumId, List<Player> homeStartXI, List<Player> awayStartXI){
+        this(id, date, homeTeamId, awayTeamId, stadiumId);
+        this.homeStartXI = homeStartXI;
+        this.awayStartXI = awayStartXI;
     }
 
     public Fixture(String id, Date date, String homeTeamId, String awayTeamId, String stadiumId){
@@ -62,7 +73,6 @@ public class Fixture {
         this.homeTeam = new Team(homeTeamId, "");
         this.awayTeam = new Team(awayTeamId, "" );
         this.stadium = new Stadium(stadiumId, "", id);
-
     }
 
     public String getId() {
@@ -133,5 +143,22 @@ public class Fixture {
 
     public String getHomeTeamId() {
         return this.homeTeam != null ? this.homeTeam.getId() : null;
+    }
+
+
+    public List<Player> getHomeStartXI() {
+        return homeStartXI;
+    }
+
+    public void setHomeStartXI(List<Player> homeStartXI) {
+        this.homeStartXI = homeStartXI;
+    }
+
+    public List<Player> getAwayStartXI() {
+        return awayStartXI;
+    }
+
+    public void setAwayStartXI(List<Player> awayStartXI) {
+        this.awayStartXI = awayStartXI;
     }
 }

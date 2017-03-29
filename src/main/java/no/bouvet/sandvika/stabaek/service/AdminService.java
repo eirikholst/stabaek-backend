@@ -3,11 +3,9 @@ package no.bouvet.sandvika.stabaek.service;
 import no.bouvet.sandvika.stabaek.domain.Player;
 import no.bouvet.sandvika.stabaek.nifs.NifsMatch;
 import no.bouvet.sandvika.stabaek.nifs.NifsPerson;
+import no.bouvet.sandvika.stabaek.nifs.NifsStageStatistics;
 import no.bouvet.sandvika.stabaek.nifs.NifsTeam;
-import no.bouvet.sandvika.stabaek.utils.NifsMatchTranslator;
-import no.bouvet.sandvika.stabaek.utils.NifsPlayerTranslator;
-import no.bouvet.sandvika.stabaek.utils.NifsStadiumTranslator;
-import no.bouvet.sandvika.stabaek.utils.NifsTeamTranslator;
+import no.bouvet.sandvika.stabaek.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,55 +27,79 @@ public class AdminService {
     @Autowired
     private PlayerService playerService;
     @Autowired
+    private PlayerStatisticsService playerStatisticsService;
+    @Autowired
     private NifsService nifsService;
-    
-    public void init() {
+
+    public void initAll() {
         List<NifsTeam> nifsTeams = nifsService.getAllTeamsFromEliteserien();
-        this.InitTeams(nifsTeams);
-        this.InitPlayers(nifsTeams);
-        this.InitStadiums(nifsTeams);
-        this.InitFixtures();
+        this.initTeams(nifsTeams);
+        this.initPlayers(nifsTeams);
+        this.initStadiums(nifsTeams);
+        this.initFixtures();
     }
 
-    private void InitPlayers(List<NifsTeam> nifsTeams) {
+    private void initPlayers(List<NifsTeam> nifsTeams) {
         getPlayers(nifsTeams).forEach(playerService::addPlayer);
+        initStageStatistics(nifsTeams);
+
     }
 
-    private void InitTeams(List<NifsTeam> nifsTeams) {
+    private void initStageStatistics(List<NifsTeam> nifsTeams) {
+        nifsTeams.stream()
+                 .map(this::getNifsPeople)
+                 .flatMap(Collection::stream)
+                 .filter(Objects::nonNull)
+                 .forEach(nifsPerson -> initStageStatistics(nifsPerson.getStageStatistics(), nifsPerson.getId()));
+    }
+
+    private void initStageStatistics(NifsStageStatistics[] stageStatisticsArray, int id) {
+        if(stageStatisticsArray == null) return;
+        Arrays.stream(stageStatisticsArray)
+                .map(stageStatistics -> NifsStageStatisticsTranslator.getPlayerStatistics(stageStatistics, Integer.toString(id)))
+                .filter(Objects::nonNull)
+                .forEach(playerStatisticsService::addPlayerStatistics);
+    }
+
+    private void initTeams(List<NifsTeam> nifsTeams) {
         NifsTeamTranslator.getTeams(nifsTeams).forEach(teamService::addTeam);
     }
 
-    private void InitStadiums(List<NifsTeam> nifsTeams) {
+    private void initStadiums(List<NifsTeam> nifsTeams) {
         NifsStadiumTranslator.getStadiums(nifsTeams).forEach(stadiumService::addStadium);
     }
 
-    private void InitFixtures() {
+    private void initFixtures() {
         List<NifsMatch> nifsMatches = nifsService.getAllNifsMatchesFromEliteserien();
         NifsMatchTranslator.getFixtures(nifsMatches).forEach(fixtureService::addFixture);
     }
 
+
     private List<Player> getPlayers(List<NifsTeam> nifsTeams) {
         List<String> teamIdsInEliteserien = nifsTeams.stream()
-                .map(team -> team.getId())
+                .map(NifsTeam::getId)
                 .filter(Objects::nonNull)
                 .map(teamId -> Integer.toString(teamId))
                 .collect(Collectors.toList());
         return nifsTeams.stream()
-                .map(nifsTeam -> getPlayers(nifsTeam, teamIdsInEliteserien))
+                .map(nifsTeam -> getNifsPeople(nifsTeam))
+                .map(nifsPeople -> getPlayers(nifsPeople, teamIdsInEliteserien))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 
-    private List<Player> getPlayers(NifsTeam nifsTeam, List<String> teamIdsInEliteserien) {
-
+    private List<NifsPerson> getNifsPeople(NifsTeam nifsTeam){
         return Arrays.stream(nifsTeam.getPlayers())
                 .map(NifsPerson::getId)
                 .map(id -> Integer.toString(id))
                 .map(id -> nifsService.getPerson(id))
-                .map(nifsPerson -> NifsPlayerTranslator.getPlayer(nifsPerson, teamIdsInEliteserien))
+                .collect(Collectors.toList());
+    }
+
+    private List<Player> getPlayers(List<NifsPerson> nifsPeople, List<String> teamIdsInEliteserien) {
+        return nifsPeople.stream()
+                .map(nifsPerson -> NifsPlayerTranslator.getPlayerWithClubTeamInEliteserien(nifsPerson, teamIdsInEliteserien))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-
-
     }
 }
