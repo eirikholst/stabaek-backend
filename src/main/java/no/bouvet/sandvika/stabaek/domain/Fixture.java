@@ -24,6 +24,7 @@ public class Fixture {
     @ManyToOne
     @JsonBackReference
     private Stadium stadium;
+    private String stadiumIdString;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
@@ -72,7 +73,8 @@ public class Fixture {
         this.date = date;
         this.homeTeam = new Team(homeTeamId, "", "");
         this.awayTeam = new Team(awayTeamId, "" , "");
-        this.stadium = new Stadium(stadiumId, "", "", "");
+        this.stadium = new Stadium(stadiumId, "", homeTeamId, "");
+        this.stadiumIdString = stadiumId;
     }
 
     public String getId() {
@@ -160,5 +162,13 @@ public class Fixture {
 
     public void setAwayStartXI(List<Player> awayStartXI) {
         this.awayStartXI = awayStartXI;
+    }
+
+    public String getStadiumIdString() {
+        return stadiumIdString;
+    }
+
+    public void setStadiumIdString(String stadiumIdString) {
+        this.stadiumIdString = stadiumIdString;
     }
 }

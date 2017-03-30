@@ -2,6 +2,7 @@ package no.bouvet.sandvika.stabaek.service;
 
 import no.bouvet.sandvika.stabaek.nifs.NifsMatch;
 import no.bouvet.sandvika.stabaek.nifs.NifsPerson;
+import no.bouvet.sandvika.stabaek.nifs.NifsStadium;
 import no.bouvet.sandvika.stabaek.nifs.NifsTeam;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -48,5 +49,11 @@ public class NifsService {
         String urlParameters = "/?withStageStatistics=1&stripFriendlies=1&stripNationals=1";
         String restUrl = nifsBaseUrl + "/persons/" + id + urlParameters;
         return restTemplate.getForObject(restUrl, NifsPerson.class);
+    }
+
+    public NifsStadium getStadium(String id) {
+        RestTemplate restTemplate = new RestTemplate();
+        String restUrl = nifsBaseUrl + "/stadiums/" + id;
+        return restTemplate.getForObject(restUrl, NifsStadium.class);
     }
 }

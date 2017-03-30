@@ -3,6 +3,9 @@ package no.bouvet.sandvika.stabaek.utils;
 import no.bouvet.sandvika.stabaek.domain.Stadium;
 import no.bouvet.sandvika.stabaek.nifs.NifsStadium;
 import no.bouvet.sandvika.stabaek.nifs.NifsTeam;
+import no.bouvet.sandvika.stabaek.service.NifsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +28,11 @@ public class NifsStadiumTranslator {
         }
     }
 
-    private static NifsStadium getNifsStadium(NifsTeam nifsTeam) {
+    public static Stadium getStadium(NifsStadium nifsStadium, String teamId){
+        return new Stadium(Integer.toString(nifsStadium.getId()), nifsStadium.getName(), teamId, nifsStadium.getImage().getUrl());
+    }
+
+    public static NifsStadium getNifsStadium(NifsTeam nifsTeam) {
         return Arrays.stream(nifsTeam.getStadiums())
                 .filter(nifsStadium -> nifsStadium.getDateTo() == null)
                 .findFirst().orElse(null);

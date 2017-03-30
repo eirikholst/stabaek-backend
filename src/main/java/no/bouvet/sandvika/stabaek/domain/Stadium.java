@@ -3,11 +3,8 @@ package no.bouvet.sandvika.stabaek.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+
 import no.bouvet.sandvika.stabaek.domain.Fixture;
 import no.bouvet.sandvika.stabaek.domain.Team;
 
@@ -16,7 +13,7 @@ public class Stadium {
     @Id
     private String id;
     private String name;
-    @OneToOne(
+    @ManyToOne(
             fetch = FetchType.LAZY
     )
     @JsonBackReference

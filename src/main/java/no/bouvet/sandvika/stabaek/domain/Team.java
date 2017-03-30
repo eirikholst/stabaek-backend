@@ -2,23 +2,19 @@ package no.bouvet.sandvika.stabaek.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
-
-import no.bouvet.sandvika.stabaek.domain.Fixture;
-import no.bouvet.sandvika.stabaek.domain.Stadium;
 
 @Entity
 public class Team {
     @Id
     private String id;
     private String name;
-    @OneToOne(
+    @OneToMany(
             mappedBy = "team"
     )
     @JsonManagedReference
-    private Stadium stadium;
+    private List<Stadium> stadiums;
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy = "homeTeam"
@@ -65,12 +61,12 @@ public class Team {
         this.name = name;
     }
 
-    public Stadium getStadium() {
-        return this.stadium;
+    public List<Stadium> getStadiums() {
+        return this.stadiums;
     }
 
-    public void setStadium(Stadium stadium) {
-        this.stadium = stadium;
+    public void setStadiums(List<Stadium> stadiums) {
+        this.stadiums = stadiums;
     }
 
     public List<Fixture> getHomeFixtures() {

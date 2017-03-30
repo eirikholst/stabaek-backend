@@ -25,4 +25,8 @@ public class StadiumService {
     public void addStadium(Stadium stadium) {
         this.stadiumRepository.save(stadium);
     }
+
+    public Stadium getStadium(String id) {
+        return this.stadiumRepository.findOne(id);
+    }
 }

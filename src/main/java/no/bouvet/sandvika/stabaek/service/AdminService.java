@@ -67,6 +67,8 @@ public class AdminService {
 
     private void initStadiums(List<NifsTeam> nifsTeams) {
         NifsStadiumTranslator.getStadiums(nifsTeams).forEach(stadiumService::addStadium);
+        //Add Ullevål to team våelerenga
+        stadiumService.addStadium(NifsStadiumTranslator.getStadium(nifsService.getStadium("7937"), "15"));
     }
 
     private void initFixtures() {

@@ -9,6 +9,7 @@ import no.bouvet.sandvika.stabaek.domain.Fixture;
 import no.bouvet.sandvika.stabaek.domain.Player;
 import no.bouvet.sandvika.stabaek.nifs.NifsMatch;
 import no.bouvet.sandvika.stabaek.nifs.NifsPerson;
+import no.bouvet.sandvika.stabaek.nifs.NifsStadium;
 import no.bouvet.sandvika.stabaek.nifs.NifsTeam;
 
 public class NifsMatchTranslator {
@@ -19,7 +20,7 @@ public class NifsMatchTranslator {
         try {
             String nonCompactHomeTeamId = Integer.toString(nifsMatch.getHomeTeam().getId());
             String nonCompactAwayTeamId = Integer.toString(nifsMatch.getAwayTeam().getId());
-            String nonCompactStadiumId = nifsMatch.getHomeTeam().getId() + "_s";
+            String nonCompactStadiumId = Integer.toString(nifsMatch.getStadium().getId());
             if (!nifsMatch.isLineupConfirmed() || nifsMatch.getHomeTeam() == null || nifsMatch.getAwayTeam() == null)
                 return new Fixture(nifsMatch.getUid(), nifsMatch.getTimestamp(), nonCompactHomeTeamId, nonCompactAwayTeamId, nonCompactStadiumId);
             return new Fixture(nifsMatch.getUid(), nifsMatch.getTimestamp(), nonCompactHomeTeamId, nonCompactAwayTeamId, nonCompactStadiumId, getStartXi(nifsMatch.getHomeTeam()), getStartXi(nifsMatch.getAwayTeam()));
