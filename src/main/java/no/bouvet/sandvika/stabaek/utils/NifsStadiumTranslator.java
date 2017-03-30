@@ -1,8 +1,10 @@
 package no.bouvet.sandvika.stabaek.utils;
 
 import no.bouvet.sandvika.stabaek.domain.Stadium;
+import no.bouvet.sandvika.stabaek.nifs.NifsStadium;
 import no.bouvet.sandvika.stabaek.nifs.NifsTeam;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -13,14 +15,20 @@ public class NifsStadiumTranslator {
 
     public static Stadium getStadium(NifsTeam nifsTeam) {
         try {
-            String stadiumId = nifsTeam.getId() + "_s";
-            String stadiumName = NifsTeamTranslator.getTeam(nifsTeam).getStadiumName();
-            String teamId = Integer.toString(nifsTeam.getId());
-            return new Stadium(stadiumId, stadiumName, teamId);
+            NifsStadium nifsStadium = getNifsStadium(nifsTeam);
+            if(nifsStadium == null) return null;
+            String stadiumImageUrl = nifsStadium.getImage() != null ? nifsStadium.getImage().getUrl() : null;
+            return new Stadium(Integer.toString(nifsStadium.getId()), nifsStadium.getName(), Integer.toString(nifsTeam.getId()), stadiumImageUrl);
         }
         catch (Exception e){
             return null;
         }
+    }
+
+    private static NifsStadium getNifsStadium(NifsTeam nifsTeam) {
+        return Arrays.stream(nifsTeam.getStadiums())
+                .filter(nifsStadium -> nifsStadium.getDateTo() == null)
+                .findFirst().orElse(null);
     }
 
     public static List<Stadium> getStadiums(List<NifsTeam> nifsTeams) {

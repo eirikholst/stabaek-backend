@@ -27,14 +27,16 @@ public class Stadium {
     @JsonManagedReference
     private List<Fixture> fixtures;
     private String teamNameString;
+    private String stadiumImageUrl;
 
     public Stadium() {
     }
 
-    public Stadium(String id, String name, String teamId) {
+    public Stadium(String id, String name, String teamId, String stadiumImageUrl) {
         this.id = id;
         this.name = name;
         this.team = new Team(teamId, "", "");
+        this.stadiumImageUrl = stadiumImageUrl;
     }
 
     public String getId() {
@@ -71,5 +73,13 @@ public class Stadium {
 
     public void setFixtures(List<Fixture> fixtures) {
         this.fixtures = fixtures;
+    }
+
+    public String getStadiumImageUrl() {
+        return stadiumImageUrl;
+    }
+
+    public void setStadiumImageUrl(String stadiumImageUrl) {
+        this.stadiumImageUrl = stadiumImageUrl;
     }
 }

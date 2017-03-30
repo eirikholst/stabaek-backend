@@ -72,7 +72,7 @@ public class Fixture {
         this.date = date;
         this.homeTeam = new Team(homeTeamId, "", "");
         this.awayTeam = new Team(awayTeamId, "" , "");
-        this.stadium = new Stadium(stadiumId, "", id);
+        this.stadium = new Stadium(stadiumId, "", "", "");
     }
 
     public String getId() {

@@ -1,10 +1,16 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
+import java.util.Date;
+
 public class NifsStadium {
     private String type;
     private int id;
     private String uid;
     private String name;
+    private Date dateFrom;
+    private Date dateTo;
+    private NifsImage image;
+
 
     public NifsStadium() {
     }
@@ -39,5 +45,29 @@ public class NifsStadium {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public Date getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
+    }
+
+    public NifsImage getImage() {
+        return image;
+    }
+
+    public void setImage(NifsImage image) {
+        this.image = image;
     }
 }
