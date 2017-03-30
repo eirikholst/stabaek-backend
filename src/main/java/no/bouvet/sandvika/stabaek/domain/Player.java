@@ -17,6 +17,7 @@ public class Player {
     @ManyToOne
     @JsonBackReference
     private Team team;
+    private String teamId;
     private String teamName;
     private String profilePictureUrl;
 
@@ -29,6 +30,7 @@ public class Player {
         this.lastName = lastName;
         this.position = position;
         this.team = new Team(teamId, "");
+        this.teamId = teamId;
         this.number = number;
         this.profilePictureUrl = profilePictureUrl;
     }
@@ -92,5 +94,13 @@ public class Player {
 
     public void setProfilePictureUrl(String profilePictureUrl) {
         this.profilePictureUrl = profilePictureUrl;
+    }
+
+    public String getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
     }
 }

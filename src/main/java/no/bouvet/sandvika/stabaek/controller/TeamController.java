@@ -28,4 +28,10 @@ public class TeamController {
     public Team getTeam(@PathVariable("id") String id) {
         return this.teamService.getTeam(id);
     }
+
+    @CrossOrigin
+    @RequestMapping("/teams/name={teamName}")
+    public List<Team> getTeamByName(@PathVariable("teamName") String teamName){
+        return this.teamService.getTeamByTeamName(teamName);
+    }
 }

@@ -29,4 +29,8 @@ public class TeamService {
     public Team getTeam(String id) {
         return teamRepository.findOne(id);
     }
+
+    public List<Team> getTeamByTeamName(String teamName) {
+        return teamRepository.findByName(teamName);
+    }
 }
