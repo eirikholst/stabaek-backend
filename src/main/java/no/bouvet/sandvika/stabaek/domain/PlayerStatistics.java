@@ -18,6 +18,7 @@ public class PlayerStatistics {
     private int assists;
     private int redCards;
     private int yellowCards;
+    private String playerIdString;
 
     @ManyToOne
     private Player player;
@@ -27,6 +28,7 @@ public class PlayerStatistics {
     public PlayerStatistics(String id, String playerId, String stageName, String stageId, String teamName, String teamId, int goals, int assists, int redCards, int yellowCards) {
         this.id = id;
         this.player = new Player(playerId, "", "", "", "", -1, "");
+        this.playerIdString = playerId;
         this.stageName = stageName;
         this.stageId = stageId;
         this.teamName = teamName;
@@ -115,5 +117,13 @@ public class PlayerStatistics {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public String getPlayerIdString() {
+        return playerIdString;
+    }
+
+    public void setPlayerIdString(String playerIdString) {
+        this.playerIdString = playerIdString;
     }
 }
