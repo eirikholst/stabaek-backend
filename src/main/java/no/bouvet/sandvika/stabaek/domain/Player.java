@@ -1,10 +1,8 @@
 package no.bouvet.sandvika.stabaek.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Player {
@@ -17,7 +15,7 @@ public class Player {
     @ManyToOne
     @JsonBackReference
     private Team team;
-    private String teamId;
+    private String teamIdString;
     private String teamName;
     private String profilePictureUrl;
 
@@ -30,7 +28,7 @@ public class Player {
         this.lastName = lastName;
         this.position = position;
         this.team = new Team(teamId, "");
-        this.teamId = teamId;
+        this.teamIdString = teamId;
         this.number = number;
         this.profilePictureUrl = profilePictureUrl;
     }
@@ -96,11 +94,11 @@ public class Player {
         this.profilePictureUrl = profilePictureUrl;
     }
 
-    public String getTeamId() {
-        return teamId;
+    public String getTeamIdString() {
+        return teamIdString;
     }
 
-    public void setTeamId(String teamId) {
-        this.teamId = teamId;
+    public void setTeamIdString(String teamIdString) {
+        this.teamIdString = teamIdString;
     }
 }
