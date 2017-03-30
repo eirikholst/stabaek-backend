@@ -70,8 +70,8 @@ public class Fixture {
     public Fixture(String id, Date date, String homeTeamId, String awayTeamId, String stadiumId){
         this.id = id;
         this.date = date;
-        this.homeTeam = new Team(homeTeamId, "");
-        this.awayTeam = new Team(awayTeamId, "" );
+        this.homeTeam = new Team(homeTeamId, "", "");
+        this.awayTeam = new Team(awayTeamId, "" , "");
         this.stadium = new Stadium(stadiumId, "", id);
     }
 

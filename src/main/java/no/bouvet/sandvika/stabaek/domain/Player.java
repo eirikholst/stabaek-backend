@@ -27,7 +27,7 @@ public class Player {
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
-        this.team = new Team(teamId, "");
+        this.team = new Team(teamId, "", "");
         this.teamIdString = teamId;
         this.number = number;
         this.profilePictureUrl = profilePictureUrl;

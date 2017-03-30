@@ -38,20 +38,15 @@ public class Team {
     @JsonManagedReference
     private List<Player> players;
 
+    private String teamLogoUrl;
+
     public Team() {
     }
 
-    public Team(String id, String name) {
+    public Team(String id, String name, String teamLogoUrl) {
         this.id = id;
         this.name = name;
-
-//        List<Player> playerList = new ArrayList<>();
-//        for(String playerId : playerIds)
-//            playerList.add(new Player(playerId, "", "", "", ""));
-//        players = new Player[playerIds.length];
-//        for(int i = 0; i < playerIds.length; i++){
-//            players[i] = playerList.get(i);
-//        }
+        this.teamLogoUrl = teamLogoUrl;
     }
 
     public String getId() {
@@ -125,5 +120,13 @@ public class Team {
 
     public void setPlayers(List<Player> players) {
         this.players = players;
+    }
+
+    public String getTeamLogoUrl() {
+        return teamLogoUrl;
+    }
+
+    public void setTeamLogoUrl(String teamLogoUrl) {
+        this.teamLogoUrl = teamLogoUrl;
     }
 }

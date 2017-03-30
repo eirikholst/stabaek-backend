@@ -34,7 +34,7 @@ public class Stadium {
     public Stadium(String id, String name, String teamId) {
         this.id = id;
         this.name = name;
-        this.team = new Team(teamId, "");
+        this.team = new Team(teamId, "", "");
     }
 
     public String getId() {
