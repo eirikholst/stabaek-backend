@@ -1,10 +1,12 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
-/**
- * Created by eirik.holst on 10.03.2017.
- */
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class NifsTeam {
     private String type;
+    @Id
     private int id;
     private String uid;
     private String name;

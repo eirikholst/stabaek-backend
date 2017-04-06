@@ -32,7 +32,7 @@ public class NifsMatchTranslator {
     private static List<Player> getStartXi(NifsTeam nifsTeam) {
         return Arrays.stream(nifsTeam.getPlayers())
                 .filter(NifsPerson::isStartsMatch)
-                .map(nifsPerson -> NifsPlayerTranslator.getPlayer(nifsPerson, nifsTeam.getId()))
+                .map(nifsPerson -> NifsPlayerTranslator.getPlayer(nifsPerson, nifsTeam))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }

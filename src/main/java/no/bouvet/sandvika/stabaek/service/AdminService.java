@@ -19,7 +19,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class AdminService {
-    
+
+    @Autowired
+    private NifsTeamService nifsTeamService;
     @Autowired
     private FixtureService fixtureService;
     @Autowired
@@ -35,30 +37,54 @@ public class AdminService {
 
     @Transactional
     public void initAll() {
-        try{
+        try {
             initAllTransactional();
-        }
-        catch (ConstraintViolationException ex){
+        } catch (ConstraintViolationException ex) {
             clearAll();
             initAllTransactional();
         }
     }
 
     private void initAllTransactional() {
-        List<NifsTeam> nifsTeams = nifsService.getAllTeamsFromEliteserien();
-        this.initTeams(nifsTeams);
-        this.initPlayers(nifsTeams);
-        this.initStageStatistics(nifsTeams);
-        this.initStadiums(nifsTeams);
+        this.initNifsTeams();
+        this.initTeams();
+        this.initPlayers();
+        this.initStageStatistics();
+        this.initStadiums();
         this.initFixtures();
     }
 
-    private void clearAll() {
+    public void clearAll() {
         this.clearFixtureDb();
         this.clearStadiumDb();
         this.clearStageStatisticsDb();
         this.clearPlayerDb();
         this.clearTeamDb();
+        this.clearNifsTeamDb();
+    }
+
+    public void updateTeams() {
+        this.initTeams();
+    }
+
+    public void updatePlayers() {
+        this.initPlayers();
+    }
+
+    public void updateStageStatistics() {
+        this.initStageStatistics();
+    }
+
+    public void updateStadiums() {
+        this.initStadiums();
+    }
+
+    public void updateFixtures() {
+        this.initFixtures();
+    }
+
+    private void clearNifsTeamDb(){
+        this.nifsTeamService.clearDb();
     }
 
     private void clearFixtureDb() {
@@ -81,32 +107,36 @@ public class AdminService {
         this.teamService.clearDb();
     }
 
-    private void initPlayers(List<NifsTeam> nifsTeams) {
-        getPlayers(nifsTeams).forEach(playerService::addPlayer);
+    private void initNifsTeams() {
+        nifsService.getAllTeamsFromEliteserien().forEach(nifsTeamService::addTeam);
     }
 
-    private void initStageStatistics(List<NifsTeam> nifsTeams) {
-        nifsTeams.stream()
-                 .map(this::getNifsPeople)
-                 .flatMap(Collection::stream)
-                 .filter(Objects::nonNull)
-                 .forEach(nifsPerson -> initStageStatistics(nifsPerson.getStageStatistics(), nifsPerson.getId()));
+    private void initPlayers() {
+        getPlayers().forEach(playerService::addPlayer);
+    }
+
+    private void initStageStatistics() {
+        getAllNifsTeams().stream()
+                .map(this::getNifsPeople)
+                .flatMap(Collection::stream)
+                .filter(Objects::nonNull)
+                .forEach(nifsPerson -> initStageStatistics(nifsPerson.getStageStatistics(), nifsPerson.getId()));
     }
 
     private void initStageStatistics(NifsStageStatistics[] stageStatisticsArray, int id) {
-        if(stageStatisticsArray == null) return;
+        if (stageStatisticsArray == null) return;
         Arrays.stream(stageStatisticsArray)
                 .map(stageStatistics -> NifsStageStatisticsTranslator.getPlayerStatistics(stageStatistics, Integer.toString(id)))
                 .filter(Objects::nonNull)
                 .forEach(playerStatisticsService::addPlayerStatistics);
     }
 
-    private void initTeams(List<NifsTeam> nifsTeams) {
-        NifsTeamTranslator.getTeams(nifsTeams).forEach(teamService::addTeam);
+    private void initTeams() {
+        NifsTeamTranslator.getTeams(getAllNifsTeams()).forEach(teamService::addTeam);
     }
 
-    private void initStadiums(List<NifsTeam> nifsTeams) {
-        NifsStadiumTranslator.getStadiums(nifsTeams).forEach(stadiumService::addStadium);
+    private void initStadiums() {
+        NifsStadiumTranslator.getStadiums(getAllNifsTeams()).forEach(stadiumService::addStadium);
         //Add Ullevål to team våelerenga
         stadiumService.addStadium(NifsStadiumTranslator.getStadium(nifsService.getStadium("7937"), "15"));
     }
@@ -117,31 +147,28 @@ public class AdminService {
     }
 
 
-    private List<Player> getPlayers(List<NifsTeam> nifsTeams) {
-        List<String> teamIdsInEliteserien = nifsTeams.stream()
-                .map(NifsTeam::getId)
-                .filter(Objects::nonNull)
-                .map(teamId -> Integer.toString(teamId))
-                .collect(Collectors.toList());
-        return nifsTeams.stream()
-                .map(nifsTeam -> getNifsPeople(nifsTeam))
-                .map(nifsPeople -> getPlayers(nifsPeople, teamIdsInEliteserien))
+    private List<Player> getPlayers() {
+        return getAllNifsTeams().stream()
+                .map(nifsTeam -> NifsPlayerTranslator.getPlayers(nifsTeam))
                 .flatMap(Collection::stream)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 
-    private List<NifsPerson> getNifsPeople(NifsTeam nifsTeam){
+    private List<NifsTeam> getAllNifsTeams() {
+        List<NifsTeam> nifsTeams = nifsTeamService.getAllNifsTeams();
+        if (nifsTeams == null || nifsTeams.size() == 0)
+            initNifsTeams();
+        if (nifsTeams == null || nifsTeams.size() == 0)
+            throw new RuntimeException("Could not get Nifs teams! Check REST API call 'https://api.nifs.no/countries/1/tournaments/5/stages/673879/teams'");
+        return nifsTeams;
+    }
+
+    private List<NifsPerson> getNifsPeople(NifsTeam nifsTeam) {
         return Arrays.stream(nifsTeam.getPlayers())
                 .map(NifsPerson::getId)
                 .map(id -> Integer.toString(id))
                 .map(id -> nifsService.getPerson(id))
-                .collect(Collectors.toList());
-    }
-
-    private List<Player> getPlayers(List<NifsPerson> nifsPeople, List<String> teamIdsInEliteserien) {
-        return nifsPeople.stream()
-                .map(nifsPerson -> NifsPlayerTranslator.getPlayerWithClubTeamInEliteserien(nifsPerson, teamIdsInEliteserien))
-                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 }

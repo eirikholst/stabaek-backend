@@ -15,10 +15,44 @@ public class AdminController {
     public AdminController() {
     }
 
-
     @CrossOrigin
     @RequestMapping({"/admin/init"})
     public void initAll() {
         adminService.initAll();
+    }
+
+
+    @CrossOrigin
+    @RequestMapping({"/admin/updateTeams"})
+    public void updateTeams() {
+        adminService.updateTeams();
+    }
+
+
+    @CrossOrigin
+    @RequestMapping({"/admin/updatePlayers"})
+    public void updatePlayers() {
+        adminService.updatePlayers();
+    }
+
+
+    @CrossOrigin
+    @RequestMapping({"/admin/updateStageStatistics"})
+    public void updateStageStatistics() {
+        adminService.updateStageStatistics();
+    }
+
+
+    @CrossOrigin
+    @RequestMapping({"/admin/updateStadiums"})
+    public void updateStadiums() {
+        adminService.updateStadiums();
+    }
+
+
+    @CrossOrigin
+    @RequestMapping({"/admin/updateFixtures"})
+    public void updateFixtures() {
+        adminService.updateFixtures();
     }
 }
