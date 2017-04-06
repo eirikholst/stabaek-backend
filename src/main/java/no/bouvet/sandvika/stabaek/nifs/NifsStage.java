@@ -2,6 +2,8 @@ package no.bouvet.sandvika.stabaek.nifs;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
+import javax.persistence.Transient;
+import java.lang.reflect.Array;
 import java.util.Date;
 
 @Embeddable
@@ -19,7 +21,8 @@ public class NifsStage {
     private int stageTypeId;
     @Embedded
     private NifsTournament tournament;
-    private boolean[] data;
+    @Transient
+    private Array data;
     private int visibilityId;
     private String comment;
     @Embedded
@@ -126,11 +129,11 @@ public class NifsStage {
         this.tournament = tournament;
     }
 
-    public boolean[] getData() {
+    public Array getData() {
         return data;
     }
 
-    public void setData(boolean[] data) {
+    public void setData(Array data) {
         this.data = data;
     }
 

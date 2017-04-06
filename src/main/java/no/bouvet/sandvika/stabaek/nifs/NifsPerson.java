@@ -1,9 +1,8 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Embeddable
 public class NifsPerson {
@@ -17,7 +16,7 @@ public class NifsPerson {
     private String shirtName;
     @Transient
     private NifsName[] names;
-    @Embedded
+    @Transient
     private NifsPosition position;
     private Date birthDate;
     @Transient
@@ -36,7 +35,7 @@ public class NifsPerson {
     @Transient
     private NifsTransfer[] transfers;
     @Transient
-    private NifsStageStatistics[] stageStatistics;
+    private List<NifsStageStatistics> stageStatistics;
     @Transient
     private NifsImage profilePicture;
     @Transient
@@ -223,11 +222,11 @@ public class NifsPerson {
         this.transfers = transfers;
     }
 
-    public NifsStageStatistics[] getStageStatistics() {
+    public List<NifsStageStatistics> getStageStatistics() {
         return stageStatistics;
     }
 
-    public void setStageStatistics(NifsStageStatistics[] stageStatistics) {
+    public void setStageStatistics(List<NifsStageStatistics> stageStatistics) {
         this.stageStatistics = stageStatistics;
     }
 

@@ -44,6 +44,10 @@ public class NifsService {
                 .collect(Collectors.toList());
     }
 
+    NifsPerson getPerson(int id) {
+        return this.getPerson(Integer.toString(id));
+    }
+
     NifsPerson getPerson(String id) {
         RestTemplate restTemplate = new RestTemplate();
         String urlParameters = "/?withStageStatistics=1&stripFriendlies=1&stripNationals=1";

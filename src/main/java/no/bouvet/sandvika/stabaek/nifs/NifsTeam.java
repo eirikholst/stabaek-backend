@@ -23,17 +23,23 @@ public class NifsTeam {
     @Transient
     private NifsPlace city;
     private boolean placeholder;
-    @Transient
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "type", column = @Column(name = "logo_type")),
+            @AttributeOverride(name = "id", column = @Column(name = "logo_id")),
+            @AttributeOverride(name = "uid", column = @Column(name = "logo_uid")),
+            @AttributeOverride(name = "url", column = @Column(name = "logo_url"))
+    })
     private NifsImage logo;
     @Embedded
     @ElementCollection
     @CollectionTable(name = "stadiums")
     @OrderColumn
     @AttributeOverrides({
-            @AttributeOverride(name = "type", column = @Column(name = "stadiums_type")),
-            @AttributeOverride(name = "id", column = @Column(name = "stadiums_id")),
-            @AttributeOverride(name = "uid", column = @Column(name = "stadiums_uid")),
-            @AttributeOverride(name = "name", column = @Column(name = "stadiums_name")),
+            @AttributeOverride(name = "type", column = @Column(name = "stadium_type")),
+            @AttributeOverride(name = "id", column = @Column(name = "stadium_id")),
+            @AttributeOverride(name = "uid", column = @Column(name = "stadium_uid")),
+            @AttributeOverride(name = "name", column = @Column(name = "stadium_name")),
     })
     private List<NifsStadium> stadiums;
     @Transient

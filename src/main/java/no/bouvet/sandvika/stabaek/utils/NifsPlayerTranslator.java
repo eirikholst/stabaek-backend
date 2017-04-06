@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class NifsPlayerTranslator {
 
-    static Player getPlayer(NifsPerson nifsPerson, NifsTeam clubTeam) {
+    public static Player getPlayer(NifsPerson nifsPerson, NifsTeam clubTeam) {
         String profilePictureUrl = nifsPerson.getProfilePicture() != null ? nifsPerson.getProfilePicture().getUrl() : null;
         return new Player(
                 Integer.toString(nifsPerson.getId()),
@@ -19,13 +19,5 @@ public class NifsPlayerTranslator {
                 Integer.toString(clubTeam.getId()),
                 clubTeam.getShirtNumber(),
                 profilePictureUrl);
-    }
-
-
-    public static List<Player> getPlayers(NifsTeam nifsTeam) {
-        return nifsTeam.getPlayers().stream()
-                .map(nifsPerson -> getPlayer(nifsPerson, nifsTeam))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
     }
 }

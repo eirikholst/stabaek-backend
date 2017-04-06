@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -123,9 +120,9 @@ public class AdminService {
                 .forEach(nifsPerson -> initStageStatistics(nifsPerson.getStageStatistics(), nifsPerson.getId()));
     }
 
-    private void initStageStatistics(NifsStageStatistics[] stageStatisticsArray, int id) {
+    private void initStageStatistics(List<NifsStageStatistics> stageStatisticsArray, int id) {
         if (stageStatisticsArray == null) return;
-        Arrays.stream(stageStatisticsArray)
+        stageStatisticsArray.stream()
                 .map(stageStatistics -> NifsStageStatisticsTranslator.getPlayerStatistics(stageStatistics, Integer.toString(id)))
                 .filter(Objects::nonNull)
                 .forEach(playerStatisticsService::addPlayerStatistics);
@@ -148,11 +145,16 @@ public class AdminService {
 
 
     private List<Player> getPlayers() {
-        return getAllNifsTeams().stream()
-                .map(nifsTeam -> NifsPlayerTranslator.getPlayers(nifsTeam))
-                .flatMap(Collection::stream)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        List<Player> players = new ArrayList<>();
+        getAllNifsTeams().forEach(nifsTeam -> {
+                    List<NifsPerson> compactNifsPersons = nifsTeam.getPlayers();
+                    compactNifsPersons.forEach(compactNifsPerson -> {
+                        NifsPerson completeNifsPerson = nifsService.getPerson(compactNifsPerson.getId());
+                        players.add(NifsPlayerTranslator.getPlayer(completeNifsPerson, nifsTeam));
+                    });
+                }
+        );
+        return players;
     }
 
     public List<NifsTeam> getAllNifsTeams() {
