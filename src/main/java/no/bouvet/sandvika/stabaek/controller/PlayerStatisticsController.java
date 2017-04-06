@@ -17,8 +17,9 @@ public class PlayerStatisticsController {
     @RequestMapping({"/playerStatistics"})
     public List<PlayerStatistics> getAllPlayerStatistics(
             @RequestParam(required = false) String playerId,
-            @RequestParam(required = false) String stageId
+            @RequestParam(required = false) String stageId,
+            @RequestParam(required = false) String teamId
     ){
-        return playerStatisticsService.getPlayerStatistics(playerId, stageId);
+        return playerStatisticsService.getPlayerStatistics(playerId, stageId, teamId);
     }
 }

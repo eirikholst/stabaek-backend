@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PlayerStatisticsService implements ClearableService{
@@ -15,22 +16,16 @@ public class PlayerStatisticsService implements ClearableService{
     private PlayerStatisticsRepository playerStatisticsRepository;
 
 
-    public List<PlayerStatistics> getPlayerStatistics(String playerId, String stageId) {
-        if(playerId == null && stageId == null)
-            return getAllPlayerStatistics();
-        if(playerId != null && stageId != null)
-            return getPlayerStatisticsByPlayerAndStage(playerId, stageId);
-        if(playerId != null)
-            return getPlayerStatisticsByPlayer(playerId);
-        return getPlayerStatisticsByStage(stageId);
+    public List<PlayerStatistics> getPlayerStatistics(String playerId, String stageId, String teamId) {
+        return getAllPlayerStatistics().stream()
+                .filter(playerStatistics -> playerId == null || playerStatistics.getPlayer().getId().equals(playerId))
+                .filter(playerStatistics -> stageId == null || playerStatistics.getStageId().equals(stageId))
+                .filter(playerStatistics -> teamId == null || playerStatistics.getTeamId().equals(teamId))
+                .collect(Collectors.toList());
     }
 
     public void clearDb() {
         this.playerStatisticsRepository.deleteAll();
-    }
-
-    private List<PlayerStatistics> getPlayerStatisticsByPlayer(String playerId){
-        return playerStatisticsRepository.findByPlayerId(playerId);
     }
 
     void addPlayerStatistics(PlayerStatistics playerStatistics){
@@ -42,13 +37,4 @@ public class PlayerStatisticsService implements ClearableService{
         playerStatisticsRepository.findAll().forEach(playerStatistics::add);
         return playerStatistics;
     }
-
-    private List<PlayerStatistics> getPlayerStatisticsByStage(String stageId){
-        return playerStatisticsRepository.findByStageId(stageId);
-    }
-
-    private List<PlayerStatistics> getPlayerStatisticsByPlayerAndStage(String playerId, String stageId){
-        return playerStatisticsRepository.findByPlayerIdAndStageId(playerId, stageId);
-    }
-
 }
