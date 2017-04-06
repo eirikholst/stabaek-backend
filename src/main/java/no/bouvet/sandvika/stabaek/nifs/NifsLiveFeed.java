@@ -1,5 +1,9 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
+@Embeddable
 public class NifsLiveFeed {
     private String type;
     private int id;
@@ -8,6 +12,7 @@ public class NifsLiveFeed {
     private int matchId;
     private boolean prioritized;
     private boolean ended;
+    @Embedded
     private NifsUser user;
 
     public NifsLiveFeed() {

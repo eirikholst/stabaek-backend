@@ -1,10 +1,15 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
+@Embeddable
 public class NifsPlace {
     private String type;
     private int id;
     private String uid;
     private String name;
+    @Embedded
     private NifsCountry country;
 
     public NifsPlace() {

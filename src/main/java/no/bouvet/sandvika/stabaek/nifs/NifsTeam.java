@@ -1,7 +1,8 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class NifsTeam {
@@ -10,6 +11,7 @@ public class NifsTeam {
     private int id;
     private String uid;
     private String name;
+    @Transient
     private NifsCountry country;
     private String url;
     private String address;
@@ -18,14 +20,42 @@ public class NifsTeam {
     private int attendanceRecord;
     private String dateFounded;
     private String comment;
+    @Transient
     private NifsPlace city;
     private boolean placeholder;
+    @Transient
     private NifsImage logo;
-    private NifsStadium[] stadiums;
+    @Embedded
+    @ElementCollection
+    @CollectionTable(name = "stadiums")
+    @OrderColumn
+    @AttributeOverrides({
+            @AttributeOverride(name = "type", column = @Column(name = "stadiums_type")),
+            @AttributeOverride(name = "id", column = @Column(name = "stadiums_id")),
+            @AttributeOverride(name = "uid", column = @Column(name = "stadiums_uid")),
+            @AttributeOverride(name = "name", column = @Column(name = "stadiums_name")),
+    })
+    private List<NifsStadium> stadiums;
+    @Transient
     private NifsName[] names;
+    @Transient
     private NifsKit[] kits;
+    @Transient
     private NifsHonour[] honours;
-    private NifsPerson[] players;
+    @Embedded
+    @ElementCollection
+    @CollectionTable(name = "players")
+    @OrderColumn
+    @AttributeOverrides({
+            @AttributeOverride(name = "type", column = @Column(name = "person_type")),
+            @AttributeOverride(name = "id", column = @Column(name = "person_id")),
+            @AttributeOverride(name = "uid", column = @Column(name = "person_uid")),
+            @AttributeOverride(name = "name", column = @Column(name = "person_name")),
+            @AttributeOverride(name = "comment", column = @Column(name = "person_comment")),
+            @AttributeOverride(name = "gender", column = @Column(name = "person_gender")),
+    })
+    private List<NifsPerson> players;
+    @Transient
     private NifsPerson[] staff;
     private boolean isYouthTeam;
     private boolean active;
@@ -154,11 +184,11 @@ public class NifsTeam {
         this.logo = logo;
     }
 
-    public NifsStadium[] getStadiums() {
+    public List<NifsStadium> getStadiums() {
         return stadiums;
     }
 
-    public void setStadiums(NifsStadium[] stadiums) {
+    public void setStadiums(List<NifsStadium> stadiums) {
         this.stadiums = stadiums;
     }
 
@@ -186,11 +216,11 @@ public class NifsTeam {
         this.honours = honours;
     }
 
-    public NifsPerson[] getPlayers() {
+    public List<NifsPerson> getPlayers() {
         return players;
     }
 
-    public void setPlayers(NifsPerson[] players) {
+    public void setPlayers(List<NifsPerson> players) {
         this.players = players;
     }
 

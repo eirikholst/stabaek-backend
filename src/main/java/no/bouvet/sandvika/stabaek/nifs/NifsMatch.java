@@ -1,7 +1,9 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Embeddable
 public class NifsMatch {
     private String type;
     private int id;
@@ -12,28 +14,41 @@ public class NifsMatch {
     private int matchTypeId;
     private int round;
     private int attendance;
+    @Embedded
     private NifsResult result;
+    @Embedded
     private NifsStadium stadium;
+    @Embedded
     private NifsTeam homeTeam;
+    @Embedded
     private NifsTeam awayTeam;
+    @Embedded
     private NifsStage stage;
     private int stageId;
+    @Embedded
     private NifsPerson[] referees;
+    @Embedded
     private NifsMatchEvent[] matchEvents;
+    @Embedded
     private NifsLiveFeed[] liveFeeds;
     private String comment;
     private int[] tv2Ids;
     private int enetpulseId;
     private boolean isLineupConfirmed;
     private boolean coveredLive;
+    @Embedded
     private NifsMatchRelation relation;
+    @Embedded
     private NifsMatchStatistics matchStatistics;
     private Date timeStartFirstHalf;
     private Date timeStartSecondHalf;
     private Date timeStartFirstHalfExtraTime;
     private Date timeStartSecondHalfExtraTime;
+    @Embedded
     private NifsMatchStream[] matchStreams;
+    @Embedded
     private NifsVideo matchHighlightVideo;
+    @Embedded
     private NifsTvChannel[] tvChannels;
 
     public NifsMatch() {

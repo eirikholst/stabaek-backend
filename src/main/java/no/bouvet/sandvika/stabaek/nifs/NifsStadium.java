@@ -1,7 +1,10 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.util.Date;
 
+@Embeddable
 public class NifsStadium {
     private String type;
     private int id;
@@ -9,6 +12,7 @@ public class NifsStadium {
     private String name;
     private Date dateFrom;
     private Date dateTo;
+    @Embedded
     private NifsImage image;
 
 

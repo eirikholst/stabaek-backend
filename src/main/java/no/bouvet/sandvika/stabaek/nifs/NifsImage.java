@@ -1,5 +1,9 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
+import javax.persistence.Embeddable;
+
+
+@Embeddable
 public class NifsImage {
     private String type;
     private int id;

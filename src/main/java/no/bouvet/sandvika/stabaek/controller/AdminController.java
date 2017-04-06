@@ -1,14 +1,17 @@
 package no.bouvet.sandvika.stabaek.controller;
 
+import no.bouvet.sandvika.stabaek.nifs.NifsTeam;
 import no.bouvet.sandvika.stabaek.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class AdminController {
+
     @Autowired
     private AdminService adminService;
 
@@ -20,6 +23,20 @@ public class AdminController {
     public void initAll() {
         adminService.initAll();
     }
+
+
+    @CrossOrigin
+    @RequestMapping({"/admin/initNifsTeams"})
+    public void initNifsTeams() {
+        adminService.initNifsTeams();
+    }
+
+    @CrossOrigin
+    @RequestMapping({"/admin/nifsTeams"})
+    public List<NifsTeam> getAllNifsTeams() {
+        return adminService.getAllNifsTeams();
+    }
+
 
 
     @CrossOrigin

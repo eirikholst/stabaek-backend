@@ -1,14 +1,19 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
-import java.util.Date;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 
+@Embeddable
 public class NifsTransfer {
     private String type;
     private int id;
     private String uid;
     private String date;
+    @Embedded
     private NifsTeam fromTeam;
+    @Embedded
     private NifsTeam toTeam;
+    @Embedded
     private NifsPerson person;
 
     public NifsTransfer() {

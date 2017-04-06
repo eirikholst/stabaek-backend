@@ -1,8 +1,8 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
-/**
- * Created by eirik.holst on 10.03.2017.
- */
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class NifsMatchStream {
     private String type;
     private int id;

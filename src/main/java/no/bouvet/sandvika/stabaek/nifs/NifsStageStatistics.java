@@ -1,10 +1,16 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
+@Embeddable
 public class NifsStageStatistics {
     private String type;
     private int id;
     private String uid;
+    @Embedded
     private NifsStage stage;
+    @Embedded
     private NifsTeam team;
     private int matches;
     private int matchesStarting;

@@ -33,7 +33,7 @@ public class NifsStadiumTranslator {
     }
 
     public static NifsStadium getNifsStadium(NifsTeam nifsTeam) {
-        return Arrays.stream(nifsTeam.getStadiums())
+        return nifsTeam.getStadiums().stream()
                 .filter(nifsStadium -> nifsStadium.getDateTo() == null)
                 .findFirst().orElse(null);
     }

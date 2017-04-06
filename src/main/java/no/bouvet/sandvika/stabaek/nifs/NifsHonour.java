@@ -1,11 +1,17 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
+
+@Embeddable
 public class NifsHonour {
     private String type;
     private int id;
     private String uid;
     private String name;
     private int honourTypeId;
+    @Embedded
     private NifsTournament tournament;
     private String year;
     private String title;

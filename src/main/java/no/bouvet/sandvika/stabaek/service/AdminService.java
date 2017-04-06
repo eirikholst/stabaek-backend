@@ -107,7 +107,7 @@ public class AdminService {
         this.teamService.clearDb();
     }
 
-    private void initNifsTeams() {
+    public void initNifsTeams() {
         nifsService.getAllTeamsFromEliteserien().forEach(nifsTeamService::addTeam);
     }
 
@@ -155,17 +155,19 @@ public class AdminService {
                 .collect(Collectors.toList());
     }
 
-    private List<NifsTeam> getAllNifsTeams() {
+    public List<NifsTeam> getAllNifsTeams() {
         List<NifsTeam> nifsTeams = nifsTeamService.getAllNifsTeams();
-        if (nifsTeams == null || nifsTeams.size() == 0)
+        if (nifsTeams == null || nifsTeams.size() == 0){
             initNifsTeams();
+            nifsTeams = nifsTeamService.getAllNifsTeams();
+        }
         if (nifsTeams == null || nifsTeams.size() == 0)
             throw new RuntimeException("Could not get Nifs teams! Check REST API call 'https://api.nifs.no/countries/1/tournaments/5/stages/673879/teams'");
         return nifsTeams;
     }
 
     private List<NifsPerson> getNifsPeople(NifsTeam nifsTeam) {
-        return Arrays.stream(nifsTeam.getPlayers())
+        return nifsTeam.getPlayers().stream()
                 .map(NifsPerson::getId)
                 .map(id -> Integer.toString(id))
                 .map(id -> nifsService.getPerson(id))

@@ -1,7 +1,9 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
+import javax.persistence.Embeddable;
 import java.util.Date;
 
+@Embeddable
 public class NifsName {
     private String type;
     private int id;

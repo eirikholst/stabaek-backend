@@ -1,5 +1,9 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
+@Embeddable
 public class NifsCountry {
     private String type;
     private int id;
@@ -9,6 +13,7 @@ public class NifsCountry {
     private int priority;
     private String CountryType;
     private String continent;
+    @Embedded
     private NifsTournament[] tournaments;
 
     public NifsCountry() {

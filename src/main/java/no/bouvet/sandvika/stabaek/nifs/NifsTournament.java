@@ -1,5 +1,9 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
+@Embeddable
 public class NifsTournament {
     private String type;
     private int id;
@@ -7,11 +11,13 @@ public class NifsTournament {
     private String name;
     private String gender;
     private int level;
+    @Embedded
     private NifsCountry country;
     private boolean neutralVenues;
     private int tournamentTypeId;
     private int tournamentCategoryId;
     private int visibilityId;
+    @Embedded
     private NifsStage[] stages;
 
     public NifsTournament() {

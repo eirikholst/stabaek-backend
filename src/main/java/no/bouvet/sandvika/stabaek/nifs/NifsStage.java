@@ -1,8 +1,10 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
-import java.lang.reflect.Array;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.util.Date;
 
+@Embeddable
 public class NifsStage {
     private String type;
     private int id;
@@ -15,11 +17,14 @@ public class NifsStage {
     private Date startDate;
     private Date endDate;
     private int stageTypeId;
+    @Embedded
     private NifsTournament tournament;
-    private Array data;
+    private boolean[] data;
     private int visibilityId;
     private String comment;
+    @Embedded
     private NifsTeam[] teams;
+    @Embedded
     private NifsName[] names;
 
     public NifsStage() {
@@ -121,11 +126,11 @@ public class NifsStage {
         this.tournament = tournament;
     }
 
-    public Array getData() {
+    public boolean[] getData() {
         return data;
     }
 
-    public void setData(Array data) {
+    public void setData(boolean[] data) {
         this.data = data;
     }
 

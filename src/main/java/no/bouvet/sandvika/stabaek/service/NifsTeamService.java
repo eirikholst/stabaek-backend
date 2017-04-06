@@ -14,6 +14,10 @@ public class NifsTeamService implements ClearableService{
     @Autowired
     private NifsTeamRepository nifsTeamRepository;
 
+    public NifsTeamService(){
+
+    }
+
     public List<NifsTeam> getAllNifsTeams(){
         List<NifsTeam> nifsTeams = new ArrayList<>();
         nifsTeamRepository.findAll().forEach(nifsTeams::add);

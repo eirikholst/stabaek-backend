@@ -23,7 +23,7 @@ public class NifsPlayerTranslator {
 
 
     public static List<Player> getPlayers(NifsTeam nifsTeam) {
-        return Arrays.stream(nifsTeam.getPlayers())
+        return nifsTeam.getPlayers().stream()
                 .map(nifsPerson -> getPlayer(nifsPerson, nifsTeam))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());

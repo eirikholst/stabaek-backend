@@ -1,7 +1,11 @@
 package no.bouvet.sandvika.stabaek.nifs;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+import javax.persistence.Transient;
 import java.util.Date;
 
+@Embeddable
 public class NifsPerson {
     private String type;
     private int id;
@@ -11,9 +15,12 @@ public class NifsPerson {
     private String lastName;
     private String nickName;
     private String shirtName;
+    @Transient
     private NifsName[] names;
+    @Embedded
     private NifsPosition position;
     private Date birthDate;
+    @Transient
     private NifsCountry country;
     private String gender;
     private String homePage;
@@ -22,11 +29,17 @@ public class NifsPerson {
     private String comment;
     private Date hungUpBootsDate;
     private Date deathDate;
+    @Transient
     private NifsPlace birthPlace;
+    @Transient
     private NifsTeam[] teams;
+    @Transient
     private NifsTransfer[] transfers;
+    @Transient
     private NifsStageStatistics[] stageStatistics;
+    @Transient
     private NifsImage profilePicture;
+    @Transient
     private NifsKit kit;
     private boolean startsMatch;
     private boolean startsOnTheBench;

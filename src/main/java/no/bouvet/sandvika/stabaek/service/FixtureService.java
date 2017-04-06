@@ -1,12 +1,12 @@
 package no.bouvet.sandvika.stabaek.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
 import no.bouvet.sandvika.stabaek.domain.Fixture;
 import no.bouvet.sandvika.stabaek.repository.FixtureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class FixtureService implements ClearableService{
