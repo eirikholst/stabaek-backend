@@ -10,4 +10,6 @@ public interface PlayerStatisticsRepository extends CrudRepository<PlayerStatist
     List<PlayerStatistics> findByPlayerId(String playerId);
 
     List<PlayerStatistics> findByStageId(String stageId);
+
+    List<PlayerStatistics> findByPlayerIdAndStageId(String playerId, String stageId);
 }

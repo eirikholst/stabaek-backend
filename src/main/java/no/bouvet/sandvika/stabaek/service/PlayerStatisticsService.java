@@ -32,6 +32,10 @@ public class PlayerStatisticsService implements ClearableService{
         return playerStatisticsRepository.findByStageId(stageId);
     }
 
+    public List<PlayerStatistics> getPlayerStatisticsByPlayerAndStage(String playerId, String stageId){
+        return playerStatisticsRepository.findByPlayerIdAndStageId(playerId, stageId);
+    }
+
     public void clearDb() {
         this.playerStatisticsRepository.deleteAll();
     }

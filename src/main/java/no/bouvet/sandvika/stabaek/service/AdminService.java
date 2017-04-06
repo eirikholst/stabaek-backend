@@ -80,7 +80,7 @@ public class AdminService {
         this.initFixtures();
     }
 
-    private void clearNifsTeamDb(){
+    private void clearNifsTeamDb() {
         this.nifsTeamService.clearDb();
     }
 
@@ -113,11 +113,8 @@ public class AdminService {
     }
 
     private void initStageStatistics() {
-        getAllNifsTeams().stream()
-                .map(this::getNifsPeople)
-                .flatMap(Collection::stream)
-                .filter(Objects::nonNull)
-                .forEach(nifsPerson -> initStageStatistics(nifsPerson.getStageStatistics(), nifsPerson.getId()));
+        getAllCompleteNifsPeople().forEach(nifsPerson ->
+                initStageStatistics(nifsPerson.getStageStatistics(), nifsPerson.getId()));
     }
 
     private void initStageStatistics(List<NifsStageStatistics> stageStatisticsArray, int id) {
@@ -146,20 +143,15 @@ public class AdminService {
 
     private List<Player> getPlayers() {
         List<Player> players = new ArrayList<>();
-        getAllNifsTeams().forEach(nifsTeam -> {
-                    List<NifsPerson> compactNifsPersons = nifsTeam.getPlayers();
-                    compactNifsPersons.forEach(compactNifsPerson -> {
-                        NifsPerson completeNifsPerson = nifsService.getPerson(compactNifsPerson.getId());
-                        players.add(NifsPlayerTranslator.getPlayer(completeNifsPerson, nifsTeam));
-                    });
-                }
-        );
+        getAllNifsTeams().forEach(nifsTeam ->
+                getNifsPeople(nifsTeam).forEach(nifsPerson ->
+                        players.add(NifsPlayerTranslator.getPlayer(nifsPerson, nifsTeam))));
         return players;
     }
 
     public List<NifsTeam> getAllNifsTeams() {
         List<NifsTeam> nifsTeams = nifsTeamService.getAllNifsTeams();
-        if (nifsTeams == null || nifsTeams.size() == 0){
+        if (nifsTeams == null || nifsTeams.size() == 0) {
             initNifsTeams();
             nifsTeams = nifsTeamService.getAllNifsTeams();
         }
@@ -173,6 +165,21 @@ public class AdminService {
                 .map(NifsPerson::getId)
                 .map(id -> Integer.toString(id))
                 .map(id -> nifsService.getPerson(id))
+                .collect(Collectors.toList());
+    }
+
+    private List<NifsPerson> getAllCompleteNifsPeople() {
+        return getAllNifsTeams().stream()
+                .map(this::getNifsPeople)
+                .flatMap(Collection::stream)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    private List<NifsPerson> getCompactNifsPeople() {
+        return getAllNifsTeams().stream()
+                .map(NifsTeam::getPlayers)
+                .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
 }

@@ -33,4 +33,11 @@ public class PlayerStatisticsController {
     public List<PlayerStatistics> getPlayerStatisticsByStage(@PathVariable(name = "stageId") String stageId){
         return playerStatisticsService.getPlayerStatisticsByStage(stageId);
     }
+
+    @CrossOrigin
+    @RequestMapping({"/playerStatistics/byPlayer={playerId}byStage={stageId}"})
+    public List<PlayerStatistics> getPlayerStatisticsByPlayerAndStage(@PathVariable(name = "playerId") String playerId,
+                                                                      @PathVariable(name = "stageId") String stageId){
+        return playerStatisticsService.getPlayerStatisticsByPlayerAndStage(playerId, stageId);
+    }
 }
