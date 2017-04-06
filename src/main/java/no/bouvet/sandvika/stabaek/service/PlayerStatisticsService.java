@@ -14,29 +14,41 @@ public class PlayerStatisticsService implements ClearableService{
     @Autowired
     private PlayerStatisticsRepository playerStatisticsRepository;
 
-    public List<PlayerStatistics> getPlayerStatisticsByPlayer(String playerId){
-        return playerStatisticsRepository.findByPlayerId(playerId);
-    }
 
-    public void addPlayerStatistics(PlayerStatistics playerStatistics){
-        playerStatisticsRepository.save(playerStatistics);
-    }
-
-    public List<PlayerStatistics> getAllPlayerStatistics() {
-        List<PlayerStatistics> playerStatistics = new ArrayList<>();
-        playerStatisticsRepository.findAll().forEach(playerStatistics::add);
-        return playerStatistics;
-    }
-
-    public List<PlayerStatistics> getPlayerStatisticsByStage(String stageId){
-        return playerStatisticsRepository.findByStageId(stageId);
-    }
-
-    public List<PlayerStatistics> getPlayerStatisticsByPlayerAndStage(String playerId, String stageId){
-        return playerStatisticsRepository.findByPlayerIdAndStageId(playerId, stageId);
+    public List<PlayerStatistics> getPlayerStatistics(String playerId, String stageId) {
+        if(playerId == null && stageId == null)
+            return getAllPlayerStatistics();
+        if(playerId != null && stageId != null)
+            return getPlayerStatisticsByPlayerAndStage(playerId, stageId);
+        if(playerId != null)
+            return getPlayerStatisticsByPlayer(playerId);
+        return getPlayerStatisticsByStage(stageId);
     }
 
     public void clearDb() {
         this.playerStatisticsRepository.deleteAll();
     }
+
+    private List<PlayerStatistics> getPlayerStatisticsByPlayer(String playerId){
+        return playerStatisticsRepository.findByPlayerId(playerId);
+    }
+
+    void addPlayerStatistics(PlayerStatistics playerStatistics){
+        playerStatisticsRepository.save(playerStatistics);
+    }
+
+    private List<PlayerStatistics> getAllPlayerStatistics() {
+        List<PlayerStatistics> playerStatistics = new ArrayList<>();
+        playerStatisticsRepository.findAll().forEach(playerStatistics::add);
+        return playerStatistics;
+    }
+
+    private List<PlayerStatistics> getPlayerStatisticsByStage(String stageId){
+        return playerStatisticsRepository.findByStageId(stageId);
+    }
+
+    private List<PlayerStatistics> getPlayerStatisticsByPlayerAndStage(String playerId, String stageId){
+        return playerStatisticsRepository.findByPlayerIdAndStageId(playerId, stageId);
+    }
+
 }

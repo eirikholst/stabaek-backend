@@ -69,6 +69,7 @@ public class AdminService {
     }
 
     public void updateStageStatistics() {
+
         this.initStageStatistics();
     }
 
