@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TeamService {
+public class TeamService implements ClearableService{
     @Autowired
     private TeamRepository teamRepository;
 
@@ -32,5 +32,9 @@ public class TeamService {
 
     public List<Team> getTeamByTeamName(String teamName) {
         return teamRepository.findByName(teamName);
+    }
+
+    public void clearDb() {
+        this.teamRepository.deleteAll();
     }
 }

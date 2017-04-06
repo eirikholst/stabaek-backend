@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PlayerService  {
+public class PlayerService implements ClearableService{
 
     @Autowired
     private PlayerRepository playerRepository;
@@ -36,5 +36,9 @@ public class PlayerService  {
     public List<Player> getPlayersFromTeam(String id) {
         Team team = teamRepository.findOne(id);
         return team.getPlayers();
+    }
+
+    public void clearDb() {
+        this.playerRepository.deleteAll();
     }
 }

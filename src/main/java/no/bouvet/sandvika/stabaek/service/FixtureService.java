@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FixtureService {
+public class FixtureService implements ClearableService{
+
     @Autowired
     private FixtureRepository fixtureRepository;
 
@@ -46,5 +47,9 @@ public class FixtureService {
 
     public Fixture getFixture(String id) {
         return fixtureRepository.findOne(id);
+    }
+
+    public void clearDb() {
+        this.fixtureRepository.deleteAll();
     }
 }

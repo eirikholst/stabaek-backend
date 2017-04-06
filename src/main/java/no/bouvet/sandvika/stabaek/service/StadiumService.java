@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StadiumService {
+public class StadiumService implements ClearableService{
     @Autowired
     private StadiumRepository stadiumRepository;
 
@@ -28,5 +28,9 @@ public class StadiumService {
 
     public Stadium getStadium(String id) {
         return this.stadiumRepository.findOne(id);
+    }
+
+    public void clearDb() {
+        this.stadiumRepository.deleteAll();
     }
 }

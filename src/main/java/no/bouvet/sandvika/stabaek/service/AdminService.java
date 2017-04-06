@@ -8,7 +8,9 @@ import no.bouvet.sandvika.stabaek.nifs.NifsTeam;
 import no.bouvet.sandvika.stabaek.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintViolationException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -31,18 +33,56 @@ public class AdminService {
     @Autowired
     private NifsService nifsService;
 
+    @Transactional
     public void initAll() {
+        try{
+            initAllTransactional();
+        }
+        catch (ConstraintViolationException ex){
+            clearAll();
+            initAllTransactional();
+        }
+    }
+
+    private void initAllTransactional() {
         List<NifsTeam> nifsTeams = nifsService.getAllTeamsFromEliteserien();
         this.initTeams(nifsTeams);
         this.initPlayers(nifsTeams);
+        this.initStageStatistics(nifsTeams);
         this.initStadiums(nifsTeams);
         this.initFixtures();
     }
 
+    private void clearAll() {
+        this.clearFixtureDb();
+        this.clearStadiumDb();
+        this.clearStageStatisticsDb();
+        this.clearPlayerDb();
+        this.clearTeamDb();
+    }
+
+    private void clearFixtureDb() {
+        this.fixtureService.clearDb();
+    }
+
+    private void clearStadiumDb() {
+        this.stadiumService.clearDb();
+    }
+
+    private void clearStageStatisticsDb() {
+        this.playerStatisticsService.clearDb();
+    }
+
+    private void clearPlayerDb() {
+        this.playerService.clearDb();
+    }
+
+    private void clearTeamDb() {
+        this.teamService.clearDb();
+    }
+
     private void initPlayers(List<NifsTeam> nifsTeams) {
         getPlayers(nifsTeams).forEach(playerService::addPlayer);
-        initStageStatistics(nifsTeams);
-
     }
 
     private void initStageStatistics(List<NifsTeam> nifsTeams) {

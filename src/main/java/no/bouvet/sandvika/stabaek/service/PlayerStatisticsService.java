@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PlayerStatisticsService {
+public class PlayerStatisticsService implements ClearableService{
 
     @Autowired
     private PlayerStatisticsRepository playerStatisticsRepository;
@@ -30,5 +30,9 @@ public class PlayerStatisticsService {
 
     public List<PlayerStatistics> getPlayerStatisticsByStage(String stageId){
         return playerStatisticsRepository.findByStageId(stageId);
+    }
+
+    public void clearDb() {
+        this.playerStatisticsRepository.deleteAll();
     }
 }

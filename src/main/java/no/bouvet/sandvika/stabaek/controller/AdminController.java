@@ -15,7 +15,7 @@ public class AdminController {
     public AdminController() {
     }
 
-    @Scheduled(fixedDelay = 86400000)
+
     @CrossOrigin
     @RequestMapping({"/admin/init"})
     public void initAll() {
