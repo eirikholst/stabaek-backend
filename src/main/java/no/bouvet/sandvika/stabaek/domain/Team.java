@@ -28,7 +28,7 @@ public class Team {
     @JsonManagedReference
     private List<Fixture> awayFixtures;
     @OneToMany(
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "team"
     )
     @JsonManagedReference

@@ -60,4 +60,8 @@ public class NifsService {
         String restUrl = nifsBaseUrl + "/stadiums/" + id;
         return restTemplate.getForObject(restUrl, NifsStadium.class);
     }
+
+    public NifsTeam getNifsTeam(int id) {
+        return getFullNifsTeam(id);
+    }
 }

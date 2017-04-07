@@ -183,4 +183,25 @@ public class AdminService {
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public void initTest() {
+        NifsTeam stabaekNifsTeam = nifsService.getNifsTeam(4);
+
+        //team
+        teamService.addTeam(NifsTeamTranslator.getTeam(stabaekNifsTeam));
+
+        //players
+        getNifsPeople(stabaekNifsTeam).stream()
+            .map(nifsPerson -> NifsPlayerTranslator.getPlayer(nifsPerson, stabaekNifsTeam))
+            .forEach(playerService::addPlayer);
+
+        //stageStatistics
+
+        //stadium
+        stadiumService.addStadium(NifsStadiumTranslator.getStadium(stabaekNifsTeam));
+
+        //fixtures
+
+    }
 }

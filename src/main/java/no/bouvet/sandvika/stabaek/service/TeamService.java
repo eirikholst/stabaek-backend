@@ -7,6 +7,7 @@ import no.bouvet.sandvika.stabaek.domain.Team;
 import no.bouvet.sandvika.stabaek.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TeamService implements ClearableService{
@@ -16,6 +17,7 @@ public class TeamService implements ClearableService{
     public TeamService() {
     }
 
+    @Transactional
     public List<Team> getAllTeams() {
         ArrayList teams = new ArrayList();
         this.teamRepository.findAll().forEach(teams::add);
@@ -26,6 +28,7 @@ public class TeamService implements ClearableService{
         this.teamRepository.save(team);
     }
 
+    @Transactional
     public Team getTeam(String id) {
         return teamRepository.findOne(id);
     }

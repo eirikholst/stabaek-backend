@@ -72,4 +72,11 @@ public class AdminController {
     public void updateFixtures() {
         adminService.updateFixtures();
     }
+
+
+    @CrossOrigin
+    @RequestMapping({"/admin/initTest"})
+    public void initTest() {
+        adminService.initTest();
+    }
 }

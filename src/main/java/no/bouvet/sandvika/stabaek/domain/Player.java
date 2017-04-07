@@ -3,6 +3,7 @@ package no.bouvet.sandvika.stabaek.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Player {
@@ -18,6 +19,11 @@ public class Player {
     private String teamIdString;
     private String teamName;
     private String profilePictureUrl;
+    @Embedded
+    @ElementCollection
+    @CollectionTable(name = "transfers")
+    @OrderColumn
+    private List<Transfer> transfers;
 
     public Player(){}
 
@@ -100,5 +106,13 @@ public class Player {
 
     public void setTeamIdString(String teamIdString) {
         this.teamIdString = teamIdString;
+    }
+
+    public List<Transfer> getTransfers() {
+        return transfers;
+    }
+
+    public void setTransfers(List<Transfer> transfers) {
+        this.transfers = transfers;
     }
 }
