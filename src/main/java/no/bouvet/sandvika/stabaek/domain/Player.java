@@ -28,6 +28,9 @@ public class Player {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "playerStatistics")
     @OrderColumn
+    @AttributeOverrides({
+            @AttributeOverride(name = "playerId", column = @Column(name = "playerStatisticsPlayerId")),
+    })
     private List<PlayerStatistics> playerStatistics;
 
     public Player(){}

@@ -1,6 +1,7 @@
 package no.bouvet.sandvika.stabaek.service;
 
 import no.bouvet.sandvika.stabaek.domain.Player;
+import no.bouvet.sandvika.stabaek.domain.PlayerStatistics;
 import no.bouvet.sandvika.stabaek.domain.Team;
 import no.bouvet.sandvika.stabaek.repository.PlayerRepository;
 import no.bouvet.sandvika.stabaek.repository.TeamRepository;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,5 +43,14 @@ public class PlayerService implements ClearableService{
 
     public void clearDb() {
         this.playerRepository.deleteAll();
+    }
+
+    public List<PlayerStatistics> getPlayersStatistics(String playerId, String stageId) {
+        return getAllPlayers().stream()
+                .filter(player -> playerId == null || player.getId().equals(playerId))
+                .map(Player::getPlayerStatistics)
+                .flatMap(Collection::stream)
+                .filter(playerStatistics -> stageId == null || playerStatistics.getStageId().equals(stageId))
+                .collect(Collectors.toList());
     }
 }

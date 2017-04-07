@@ -21,6 +21,6 @@ public class NifsPlayerTranslator {
                 clubTeam.getShirtNumber(),
                 profilePictureUrl,
                 NifsTransferTranslator.getTransfers(nifsPerson.getTransfers()),
-                NifsStageStatisticsTranslator.getPlayerStatistics(nifsPerson.getStageStatistics()));
+                NifsStageStatisticsTranslator.getPlayerStatistics(nifsPerson));
     }
 }
