@@ -20,12 +20,12 @@ public class Player {
     private String teamName;
     private String profilePictureUrl;
     @Embedded
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "transfers")
     @OrderColumn
     private List<Transfer> transfers;
     @Embedded
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "playerStatistics")
     @OrderColumn
     @AttributeOverrides({
