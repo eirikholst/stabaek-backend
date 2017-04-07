@@ -24,11 +24,10 @@ public class Player {
     @CollectionTable(name = "transfers")
     @OrderColumn
     private List<Transfer> transfers;
-//    @Embedded
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @CollectionTable(name = "transfers")
-//    @OrderColumn
-    @Transient
+    @Embedded
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "playerStatistics")
+    @OrderColumn
     private List<PlayerStatistics> playerStatistics;
 
     public Player(){}
