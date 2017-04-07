@@ -27,7 +27,7 @@ public class PlayerStatistics {
 
     public PlayerStatistics(String id, String playerId, String stageName, String stageId, String teamName, String teamId, int goals, int assists, int redCards, int yellowCards) {
         this.id = id;
-        this.player = new Player(playerId, "", "", "", "", -1, "");
+        this.player = new Player(playerId, "", "", "", "", -1, "", null);
         this.playerIdString = playerId;
         this.stageName = stageName;
         this.stageId = stageId;

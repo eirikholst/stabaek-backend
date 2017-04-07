@@ -28,7 +28,8 @@ public class Player {
     public Player(){}
 
     public Player(String id, String firstName, String lastName,
-                  String position, String teamId, int number, String profilePictureUrl) {
+                  String position, String teamId, int number, String profilePictureUrl,
+                  List<Transfer> transfers) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,6 +38,7 @@ public class Player {
         this.teamIdString = teamId;
         this.number = number;
         this.profilePictureUrl = profilePictureUrl;
+        this.transfers = transfers;
     }
 
     public String getId() {

@@ -12,16 +12,14 @@ public class NifsPlayerTranslator {
 
     public static Player getPlayer(NifsPerson nifsPerson, NifsTeam clubTeam) {
         String profilePictureUrl = nifsPerson.getProfilePicture() != null ? nifsPerson.getProfilePicture().getUrl() : null;
-        Player player = new Player(
+        return new Player(
                 Integer.toString(nifsPerson.getId()),
                 nifsPerson.getFirstName(),
                 nifsPerson.getLastName(),
                 nifsPerson.getPosition().getPosition(),
                 Integer.toString(clubTeam.getId()),
                 clubTeam.getShirtNumber(),
-                profilePictureUrl);
-        List<Transfer> transfers = NifsTransferTranslator.getTransfers(nifsPerson.getTransfers());
-        player.setTransfers(transfers);
-        return player;
+                profilePictureUrl,
+                NifsTransferTranslator.getTransfers(nifsPerson.getTransfers()));
     }
 }
