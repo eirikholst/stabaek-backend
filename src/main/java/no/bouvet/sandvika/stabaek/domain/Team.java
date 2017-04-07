@@ -3,6 +3,7 @@ package no.bouvet.sandvika.stabaek.domain;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -32,7 +33,7 @@ public class Team {
             mappedBy = "team"
     )
     @JsonManagedReference
-    private List<Player> players;
+    private Set<Player> players;
 
     private String teamLogoUrl;
 
@@ -110,11 +111,11 @@ public class Team {
         return this.name;
     }
 
-    public List<Player> getPlayers() {
+    public Set<Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(Set<Player> players) {
         this.players = players;
     }
 

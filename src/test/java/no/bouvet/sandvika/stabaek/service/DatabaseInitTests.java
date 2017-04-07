@@ -2,6 +2,7 @@ package no.bouvet.sandvika.stabaek.service;
 
 import no.bouvet.sandvika.stabaek.domain.Player;
 import no.bouvet.sandvika.stabaek.domain.Team;
+import org.hibernate.Hibernate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.Assert;
+import javax.transaction.Transactional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -39,6 +41,7 @@ public class DatabaseInitTests {
     @Test
     public void testTeamHasPlayers(){
         Assert.notNull(testTeam, "test team is null");
+        Hibernate.initialize(testTeam.getPlayers());
         Assert.notNull(testTeam.getPlayers(), "test team player list is null");
         Assert.notEmpty(testTeam.getPlayers(), "test team player list is empty");
     }
@@ -54,6 +57,13 @@ public class DatabaseInitTests {
         Assert.notNull(testPlayer, "test player is null");
         Assert.notNull(testPlayer, "test player transfer list is null");
         Assert.notEmpty(testPlayer.getTransfers(), "test player transfer list is empty");
+    }
+
+    @Test
+    public void testPlayerHasPlayerStatistics(){
+        Assert.notNull(testPlayer, "test player is null");
+        Assert.notNull(testPlayer, "test player playerStatistics list is null");
+        Assert.notEmpty(testPlayer.getPlayerStatistics(), "test player playerStatistics list is empty");
     }
 
 

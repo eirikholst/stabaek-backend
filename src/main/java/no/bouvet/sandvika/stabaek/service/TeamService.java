@@ -17,7 +17,6 @@ public class TeamService implements ClearableService{
     public TeamService() {
     }
 
-    @Transactional
     public List<Team> getAllTeams() {
         ArrayList teams = new ArrayList();
         this.teamRepository.findAll().forEach(teams::add);
@@ -28,7 +27,6 @@ public class TeamService implements ClearableService{
         this.teamRepository.save(team);
     }
 
-    @Transactional
     public Team getTeam(String id) {
         return teamRepository.findOne(id);
     }
