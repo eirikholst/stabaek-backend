@@ -20,7 +20,7 @@ public class Player {
     private String teamName;
     private String profilePictureUrl;
     @Embedded
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "transfers")
     @OrderColumn
     private List<Transfer> transfers;

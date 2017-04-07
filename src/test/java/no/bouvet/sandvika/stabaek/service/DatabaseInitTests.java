@@ -21,11 +21,13 @@ public class DatabaseInitTests {
     @Autowired
     private PlayerService playerService;
     private Team testTeam;
+    private Player testPlayer;
 
     @Before
     public void initTestRuns(){
         adminService.initTest();
         testTeam = teamService.getTeam("4");
+        testPlayer = playerService.getPlayer("434");
     }
 
     @Test
@@ -45,7 +47,13 @@ public class DatabaseInitTests {
     public void playerDbContainsTestPlayer(){
         Player testPlayer = playerService.getPlayer("434");
         Assert.notNull(testPlayer, "test player is null");
+    }
 
+    @Test
+    public void testPlayerHasTransfers(){
+        Assert.notNull(testPlayer, "test player is null");
+        Assert.notNull(testPlayer, "test player transfer list is null");
+        Assert.notEmpty(testPlayer.getTransfers(), "test player transfer list is empty");
     }
 
 

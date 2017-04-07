@@ -6,6 +6,7 @@ import no.bouvet.sandvika.stabaek.repository.PlayerRepository;
 import no.bouvet.sandvika.stabaek.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class PlayerService implements ClearableService{
     @Autowired
     private TeamRepository teamRepository;
 
+    @Transactional
     public List<Player> getAllPlayers(){
         List<Player> players = new ArrayList<>();
         for (Player player : playerRepository.findAll())
@@ -25,19 +27,23 @@ public class PlayerService implements ClearableService{
         return players;
     }
 
+    @Transactional
     public void addPlayer(Player player) {
         this.playerRepository.save(player);
     }
 
+    @Transactional
     public Player getPlayer(String id) {
         return playerRepository.findOne(id);
     }
 
+    @Transactional
     public List<Player> getPlayersFromTeam(String id) {
         Team team = teamRepository.findOne(id);
         return team.getPlayers();
     }
 
+    @Transactional
     public void clearDb() {
         this.playerRepository.deleteAll();
     }
