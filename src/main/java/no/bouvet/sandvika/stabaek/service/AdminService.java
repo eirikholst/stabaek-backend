@@ -28,8 +28,6 @@ public class AdminService {
     @Autowired
     private PlayerService playerService;
     @Autowired
-    private PlayerStatisticsService playerStatisticsService;
-    @Autowired
     private NifsService nifsService;
 
     @Transactional
@@ -46,7 +44,6 @@ public class AdminService {
         this.initNifsTeams();
         this.initTeams();
         this.initPlayers();
-        this.initStageStatistics();
         this.initStadiums();
         this.initFixtures();
     }
@@ -54,7 +51,6 @@ public class AdminService {
     public void clearAll() {
         this.clearFixtureDb();
         this.clearStadiumDb();
-        this.clearStageStatisticsDb();
         this.clearPlayerDb();
         this.clearTeamDb();
         this.clearNifsTeamDb();
@@ -66,11 +62,6 @@ public class AdminService {
 
     public void updatePlayers() {
         this.initPlayers();
-    }
-
-    public void updateStageStatistics() {
-
-        this.initStageStatistics();
     }
 
     public void updateStadiums() {
@@ -93,10 +84,6 @@ public class AdminService {
         this.stadiumService.clearDb();
     }
 
-    private void clearStageStatisticsDb() {
-        this.playerStatisticsService.clearDb();
-    }
-
     private void clearPlayerDb() {
         this.playerService.clearDb();
     }
@@ -111,19 +98,6 @@ public class AdminService {
 
     private void initPlayers() {
         getPlayers().forEach(playerService::addPlayer);
-    }
-
-    private void initStageStatistics() {
-        getAllCompleteNifsPeople().forEach(nifsPerson ->
-                initStageStatistics(nifsPerson.getStageStatistics(), nifsPerson.getId()));
-    }
-
-    private void initStageStatistics(List<NifsStageStatistics> stageStatisticsArray, int id) {
-        if (stageStatisticsArray == null) return;
-        stageStatisticsArray.stream()
-                .map(stageStatistics -> NifsStageStatisticsTranslator.getPlayerStatistics(stageStatistics, Integer.toString(id)))
-                .filter(Objects::nonNull)
-                .forEach(playerStatisticsService::addPlayerStatistics);
     }
 
     private void initTeams() {

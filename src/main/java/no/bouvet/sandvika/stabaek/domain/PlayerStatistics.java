@@ -2,14 +2,13 @@ package no.bouvet.sandvika.stabaek.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity
+@Embeddable
 public class PlayerStatistics {
-    @Id
-    private String id;
     private String stageName;
     private String stageId;
     private String teamName;
@@ -18,17 +17,11 @@ public class PlayerStatistics {
     private int assists;
     private int redCards;
     private int yellowCards;
-    private String playerIdString;
-
-    @ManyToOne
-    private Player player;
 
     public PlayerStatistics() {}
 
-    public PlayerStatistics(String id, String playerId, String stageName, String stageId, String teamName, String teamId, int goals, int assists, int redCards, int yellowCards) {
-        this.id = id;
-        this.player = new Player(playerId, "", "", "", "", -1, "", null);
-        this.playerIdString = playerId;
+    public PlayerStatistics(String stageName, String stageId, String teamName, String teamId, int goals,
+                            int assists, int redCards, int yellowCards) {
         this.stageName = stageName;
         this.stageId = stageId;
         this.teamName = teamName;
@@ -37,14 +30,6 @@ public class PlayerStatistics {
         this.assists = assists;
         this.redCards = redCards;
         this.yellowCards = yellowCards;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getStageName() {
@@ -109,21 +94,5 @@ public class PlayerStatistics {
 
     public void setYellowCards(int yellowCards) {
         this.yellowCards = yellowCards;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public String getPlayerIdString() {
-        return playerIdString;
-    }
-
-    public void setPlayerIdString(String playerIdString) {
-        this.playerIdString = playerIdString;
     }
 }

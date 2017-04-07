@@ -20,6 +20,7 @@ public class NifsPlayerTranslator {
                 Integer.toString(clubTeam.getId()),
                 clubTeam.getShirtNumber(),
                 profilePictureUrl,
-                NifsTransferTranslator.getTransfers(nifsPerson.getTransfers()));
+                NifsTransferTranslator.getTransfers(nifsPerson.getTransfers()),
+                NifsStageStatisticsTranslator.getPlayerStatistics(nifsPerson.getStageStatistics()));
     }
 }

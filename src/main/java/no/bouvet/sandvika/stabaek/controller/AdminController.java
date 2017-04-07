@@ -54,13 +54,6 @@ public class AdminController {
 
 
     @CrossOrigin
-    @RequestMapping({"/admin/updateStageStatistics"})
-    public void updateStageStatistics() {
-        adminService.updateStageStatistics();
-    }
-
-
-    @CrossOrigin
     @RequestMapping({"/admin/updateStadiums"})
     public void updateStadiums() {
         adminService.updateStadiums();

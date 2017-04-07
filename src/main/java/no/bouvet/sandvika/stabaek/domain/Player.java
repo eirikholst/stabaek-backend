@@ -24,12 +24,18 @@ public class Player {
     @CollectionTable(name = "transfers")
     @OrderColumn
     private List<Transfer> transfers;
+//    @Embedded
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    @CollectionTable(name = "transfers")
+//    @OrderColumn
+    @Transient
+    private List<PlayerStatistics> playerStatistics;
 
     public Player(){}
 
     public Player(String id, String firstName, String lastName,
                   String position, String teamId, int number, String profilePictureUrl,
-                  List<Transfer> transfers) {
+                  List<Transfer> transfers, List<PlayerStatistics> playerStatistics) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,6 +45,7 @@ public class Player {
         this.number = number;
         this.profilePictureUrl = profilePictureUrl;
         this.transfers = transfers;
+        this.playerStatistics = playerStatistics;
     }
 
     public String getId() {
@@ -116,5 +123,13 @@ public class Player {
 
     public void setTransfers(List<Transfer> transfers) {
         this.transfers = transfers;
+    }
+
+    public List<PlayerStatistics> getPlayerStatistics() {
+        return playerStatistics;
+    }
+
+    public void setPlayerStatistics(List<PlayerStatistics> playerStatistics) {
+        this.playerStatistics = playerStatistics;
     }
 }
