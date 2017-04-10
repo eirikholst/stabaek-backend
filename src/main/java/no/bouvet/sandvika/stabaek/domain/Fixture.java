@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@javax.persistence.Entity
+@Entity
 public class Fixture {
     @Id
     private String id;

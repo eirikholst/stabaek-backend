@@ -1,5 +1,6 @@
 package no.bouvet.sandvika.stabaek.service;
 
+import no.bouvet.sandvika.stabaek.domain.Fixture;
 import no.bouvet.sandvika.stabaek.domain.Player;
 import no.bouvet.sandvika.stabaek.domain.PlayerStatistics;
 import no.bouvet.sandvika.stabaek.domain.Team;
@@ -26,9 +27,17 @@ public class DatabaseInitTests {
     private TeamService teamService;
     @Autowired
     private PlayerService playerService;
+    @Autowired
+    private FixtureService fixtureService;
+
     private Team testTeam;
     private Player testPlayer;
     private PlayerStatistics testPlayerStatistics;
+
+    private String stabaekId = "4";
+    private String aalesundId = "46";
+    private String mortenSkjoensbergId = "434";
+    private String stabaekVsAalesundId = "1319283";
 
     @Before
     public void initTestRuns(){
@@ -45,24 +54,24 @@ public class DatabaseInitTests {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     private void initTestTeam() {
-        testTeam = teamService.getTeam("4");
+        testTeam = teamService.getTeam(stabaekId);
         Hibernate.initialize(testTeam.getPlayers());
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     private void initTestPlayer() {
-        testPlayer = playerService.getPlayer("434");
+        testPlayer = playerService.getPlayer(mortenSkjoensbergId);
         Hibernate.initialize(testPlayer.getPlayerStatistics());
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     private void initTestPlayerStatistics() {
-        testPlayerStatistics = playerService.getPlayersStatistics("434", null, false).get(0);
+        testPlayerStatistics = playerService.getPlayersStatistics(mortenSkjoensbergId, null, false).get(0);
     }
 
     @Test
     public void teamDbContainsTestTeam(){
-        Team testTeam = teamService.getTeam("4");
+        Team testTeam = teamService.getTeam(stabaekId);
         Assert.notNull(testTeam, "test team is null");
     }
 
@@ -75,7 +84,7 @@ public class DatabaseInitTests {
 
     @Test
     public void playerDbContainsTestPlayer(){
-        Player testPlayer = playerService.getPlayer("434");
+        Player testPlayer = playerService.getPlayer(mortenSkjoensbergId);
         Assert.notNull(testPlayer, "test player is null");
     }
 
@@ -100,11 +109,16 @@ public class DatabaseInitTests {
     }
 
     @Test
-    public void testPlayerStatiticsHasPlayerName(){
+    public void testPlayerStatisticsHasPlayerName(){
         Assert.notNull(testPlayerStatistics, "test playerStatistics is null");
         Assert.notNull(testPlayerStatistics.getPlayerName(), "test playerStatistics playerName is null");
         assertThat(testPlayerStatistics.getPlayerName()).isNotEmpty();
     }
 
+    @Test
+    public void testFixtureIsNotNull(){
+        Fixture fixture = fixtureService.getFixture(stabaekVsAalesundId);
+        Assert.notNull(fixture, "test fixture is null");
+    }
 
 }

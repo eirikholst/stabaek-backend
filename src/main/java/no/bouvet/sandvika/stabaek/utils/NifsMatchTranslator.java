@@ -16,14 +16,15 @@ public class NifsMatchTranslator {
     public NifsMatchTranslator() {
     }
 
-    private static Fixture getFixture(NifsMatch nifsMatch) {
+    public static Fixture getFixture(NifsMatch nifsMatch) {
         try {
+            String id = Integer.toString(nifsMatch.getId());
             String nonCompactHomeTeamId = Integer.toString(nifsMatch.getHomeTeam().getId());
             String nonCompactAwayTeamId = Integer.toString(nifsMatch.getAwayTeam().getId());
             String nonCompactStadiumId = Integer.toString(nifsMatch.getStadium().getId());
             if (!nifsMatch.isLineupConfirmed() || nifsMatch.getHomeTeam() == null || nifsMatch.getAwayTeam() == null)
-                return new Fixture(nifsMatch.getUid(), nifsMatch.getTimestamp(), nonCompactHomeTeamId, nonCompactAwayTeamId, nonCompactStadiumId);
-            return new Fixture(nifsMatch.getUid(), nifsMatch.getTimestamp(), nonCompactHomeTeamId, nonCompactAwayTeamId, nonCompactStadiumId, getStartXi(nifsMatch.getHomeTeam()), getStartXi(nifsMatch.getAwayTeam()));
+                return new Fixture(id, nifsMatch.getTimestamp(), nonCompactHomeTeamId, nonCompactAwayTeamId, nonCompactStadiumId);
+            return new Fixture(id, nifsMatch.getTimestamp(), nonCompactHomeTeamId, nonCompactAwayTeamId, nonCompactStadiumId, getStartXi(nifsMatch.getHomeTeam()), getStartXi(nifsMatch.getAwayTeam()));
         } catch (Exception e) {
             return null;
         }

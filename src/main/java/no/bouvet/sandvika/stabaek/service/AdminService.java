@@ -162,21 +162,21 @@ public class AdminService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void initTest() {
         NifsTeam stabaekNifsTeam = nifsService.getNifsTeam(4);
+        NifsTeam aalesundNifsTeam = nifsService.getNifsTeam(46);
 
         //team
         teamService.addTeam(NifsTeamTranslator.getTeam(stabaekNifsTeam));
+        teamService.addTeam(NifsTeamTranslator.getTeam(aalesundNifsTeam));
 
         //players
         getNifsPeople(stabaekNifsTeam).stream()
             .map(nifsPerson -> NifsPlayerTranslator.getPlayer(nifsPerson, stabaekNifsTeam))
             .forEach(playerService::addPlayer);
 
-        //stageStatistics
-
         //stadium
         stadiumService.addStadium(NifsStadiumTranslator.getStadium(stabaekNifsTeam));
 
         //fixtures
-
+        fixtureService.addFixture(NifsMatchTranslator.getFixture(nifsService.getNifsMatch(1319283)));
     }
 }

@@ -34,14 +34,18 @@ public class NifsService {
     }
 
     List<NifsMatch> getAllNifsMatchesFromEliteserien() {
-
         RestTemplate restTemplate = new RestTemplate();
         return Arrays.stream(restTemplate.getForObject(eliteserienUrl + "/matches", NifsMatch[].class))
                 .map(NifsMatch::getId)
                 .filter(Objects::nonNull)
-                .map(matchId -> restTemplate.getForObject(nifsBaseUrl + "/matches/" + matchId, NifsMatch.class))
+                .map(this::getNifsMatch)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+    }
+
+    public NifsMatch getNifsMatch(Integer matchId) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(nifsBaseUrl + "/matches/" + matchId, NifsMatch.class);
     }
 
     NifsPerson getPerson(int id) {
