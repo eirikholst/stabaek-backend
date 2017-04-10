@@ -11,11 +11,11 @@ public class NifsHeadToHead {
     @Embedded
     private NifsTeam[] teams;
     @Embedded
-    private NifsMatch[] previousMathces;
+    private NifsMatch[] previousMatches;
     @Embedded
-    private NifsMatch[] previousMathcesOtherTournaments;
+    private NifsMatch[] previousMatchesFriendlies;
     @Embedded
-    private NifsMatch[] previousMathcesFrendlies;
+    private NifsMatch[] previousMatchesOtherTournaments;
     private String tournamentName;
     private String fromSeason;
 
@@ -54,28 +54,28 @@ public class NifsHeadToHead {
         this.teams = teams;
     }
 
-    public NifsMatch[] getPreviousMathces() {
-        return previousMathces;
+    public NifsMatch[] getPreviousMatches() {
+        return previousMatches;
     }
 
-    public void setPreviousMathces(NifsMatch[] previousMathces) {
-        this.previousMathces = previousMathces;
+    public void setPreviousMatches(NifsMatch[] previousMatches) {
+        this.previousMatches = previousMatches;
     }
 
-    public NifsMatch[] getPreviousMathcesOtherTournaments() {
-        return previousMathcesOtherTournaments;
+    public NifsMatch[] getPreviousMatchesOtherTournaments() {
+        return previousMatchesOtherTournaments;
     }
 
-    public void setPreviousMathcesOtherTournaments(NifsMatch[] previousMathcesOtherTournaments) {
-        this.previousMathcesOtherTournaments = previousMathcesOtherTournaments;
+    public void setPreviousMatchesOtherTournaments(NifsMatch[] previousMatchesOtherTournaments) {
+        this.previousMatchesOtherTournaments = previousMatchesOtherTournaments;
     }
 
-    public NifsMatch[] getPreviousMathcesFrendlies() {
-        return previousMathcesFrendlies;
+    public NifsMatch[] getPreviousMatchesFrendlies() {
+        return previousMatchesFriendlies;
     }
 
-    public void setPreviousMathcesFrendlies(NifsMatch[] previousMathcesFrendlies) {
-        this.previousMathcesFrendlies = previousMathcesFrendlies;
+    public void setPreviousMatchesFrendlies(NifsMatch[] previousMatchesFrendlies) {
+        this.previousMatchesFriendlies = previousMatchesFrendlies;
     }
 
     public String getTournamentName() {

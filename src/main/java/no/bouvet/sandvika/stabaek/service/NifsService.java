@@ -1,9 +1,6 @@
 package no.bouvet.sandvika.stabaek.service;
 
-import no.bouvet.sandvika.stabaek.nifs.NifsMatch;
-import no.bouvet.sandvika.stabaek.nifs.NifsPerson;
-import no.bouvet.sandvika.stabaek.nifs.NifsStadium;
-import no.bouvet.sandvika.stabaek.nifs.NifsTeam;
+import no.bouvet.sandvika.stabaek.nifs.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -67,5 +64,11 @@ public class NifsService {
 
     public NifsTeam getNifsTeam(int id) {
         return getFullNifsTeam(id);
+    }
+
+    public NifsHeadToHead getHeadToHead(String id) {
+        RestTemplate restTemplate = new RestTemplate();
+        String restUrl = nifsBaseUrl + "/matches/" + id + "/headToHead";
+        return restTemplate.getForObject(restUrl, NifsHeadToHead.class);
     }
 }

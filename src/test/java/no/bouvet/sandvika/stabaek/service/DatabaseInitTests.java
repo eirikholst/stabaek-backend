@@ -1,9 +1,6 @@
 package no.bouvet.sandvika.stabaek.service;
 
-import no.bouvet.sandvika.stabaek.domain.Fixture;
-import no.bouvet.sandvika.stabaek.domain.Player;
-import no.bouvet.sandvika.stabaek.domain.PlayerStatistics;
-import no.bouvet.sandvika.stabaek.domain.Team;
+import no.bouvet.sandvika.stabaek.domain.*;
 import org.hibernate.Hibernate;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +30,7 @@ public class DatabaseInitTests {
     private Team testTeam;
     private Player testPlayer;
     private PlayerStatistics testPlayerStatistics;
+    private Fixture testFixture;
 
     private String stabaekId = "4";
     private String aalesundId = "46";
@@ -45,6 +43,7 @@ public class DatabaseInitTests {
         initTestTeam();
         initTestPlayer();
         initTestPlayerStatistics();
+        initTestFixture();
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -67,6 +66,11 @@ public class DatabaseInitTests {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     private void initTestPlayerStatistics() {
         testPlayerStatistics = playerService.getPlayersStatistics(mortenSkjoensbergId, null, false).get(0);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    private void initTestFixture() {
+        testFixture = fixtureService.getFixture(stabaekVsAalesundId);
     }
 
     @Test
@@ -119,6 +123,12 @@ public class DatabaseInitTests {
     public void testFixtureIsNotNull(){
         Fixture fixture = fixtureService.getFixture(stabaekVsAalesundId);
         Assert.notNull(fixture, "test fixture is null");
+    }
+
+    @Test
+    public void testFixtureHasHeadToHead(){
+        HeadToHead headToHead = fixtureService.getHeadToHead(stabaekVsAalesundId);
+        Assert.notNull(headToHead, "test headToHead is null");
     }
 
 }

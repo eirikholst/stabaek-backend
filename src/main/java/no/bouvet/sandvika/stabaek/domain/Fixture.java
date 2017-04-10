@@ -59,13 +59,10 @@ public class Fixture {
     @Transient
     private List<Player> awayStartXI;
 
-    public Fixture() {
-    }
+    private int homeScore;
+    private int awayScore;
 
-    public Fixture(String id, Date date, String homeTeamId, String awayTeamId, String stadiumId, List<Player> homeStartXI, List<Player> awayStartXI){
-        this(id, date, homeTeamId, awayTeamId, stadiumId);
-        this.homeStartXI = homeStartXI;
-        this.awayStartXI = awayStartXI;
+    public Fixture() {
     }
 
     public Fixture(String id, Date date, String homeTeamId, String awayTeamId, String stadiumId){
@@ -170,5 +167,21 @@ public class Fixture {
 
     public void setStadiumIdString(String stadiumIdString) {
         this.stadiumIdString = stadiumIdString;
+    }
+
+    public int getHomeScore() {
+        return homeScore;
+    }
+
+    public void setHomeScore(int homeScore) {
+        this.homeScore = homeScore;
+    }
+
+    public int getAwayScore() {
+        return awayScore;
+    }
+
+    public void setAwayScore(int awayScore) {
+        this.awayScore = awayScore;
     }
 }

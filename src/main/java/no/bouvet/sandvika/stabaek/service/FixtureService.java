@@ -1,7 +1,9 @@
 package no.bouvet.sandvika.stabaek.service;
 
 import no.bouvet.sandvika.stabaek.domain.Fixture;
+import no.bouvet.sandvika.stabaek.domain.HeadToHead;
 import no.bouvet.sandvika.stabaek.repository.FixtureRepository;
+import no.bouvet.sandvika.stabaek.utils.NifsHeadToHeadTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ public class FixtureService implements ClearableService{
 
     @Autowired
     private FixtureRepository fixtureRepository;
+    @Autowired
+    private NifsService nifsService;
 
     public FixtureService() {
     }
@@ -51,5 +55,9 @@ public class FixtureService implements ClearableService{
 
     public void clearDb() {
         this.fixtureRepository.deleteAll();
+    }
+
+    public HeadToHead getHeadToHead(String id) {
+        return NifsHeadToHeadTranslator.getHeadToHead(nifsService.getHeadToHead(id));
     }
 }

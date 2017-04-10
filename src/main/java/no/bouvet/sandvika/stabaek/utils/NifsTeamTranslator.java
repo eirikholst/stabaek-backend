@@ -6,6 +6,7 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import no.bouvet.sandvika.stabaek.domain.Team;
+import no.bouvet.sandvika.stabaek.domain.TeamInHeadToHeadModus;
 import no.bouvet.sandvika.stabaek.nifs.NifsImage;
 import no.bouvet.sandvika.stabaek.nifs.NifsPerson;
 import no.bouvet.sandvika.stabaek.nifs.NifsTeam;
@@ -22,5 +23,33 @@ public class NifsTeamTranslator {
 
     public static List<Team> getTeams(List<NifsTeam> nifsTeam) {
         return nifsTeam.stream().map(NifsTeamTranslator::getTeam).collect(Collectors.toList());
+    }
+
+    public static TeamInHeadToHeadModus getTeamInHeadToHeadModus(NifsTeam nifsTeam) {
+        return new TeamInHeadToHeadModus(
+                Integer.toString(nifsTeam.getId()),
+                nifsTeam.getName(),
+                nifsTeam.getUrl(),
+                nifsTeam.getWonHome(),
+                nifsTeam.getDrawnHome(),
+                nifsTeam.getLostHome(),
+                nifsTeam.getGoalsForHome(),
+                nifsTeam.getGoalsAgainstHome(),
+                nifsTeam.getWonAway(),
+                nifsTeam.getDrawnAway(),
+                nifsTeam.getLostAway(),
+                nifsTeam.getGoalsForAway(),
+                nifsTeam.getGoalsAgainstAway(),
+                nifsTeam.getWonHomeForm(),
+                nifsTeam.getDrawnHomeForm(),
+                nifsTeam.getLostHomeForm(),
+                nifsTeam.getGoalsForHomeForm(),
+                nifsTeam.getGoalsAgainstHomeFor(),
+                nifsTeam.getWonAwayForm(),
+                nifsTeam.getDrawnAwayForm(),
+                nifsTeam.getLostAwayForm(),
+                nifsTeam.getGoalsForAwayForm(),
+                nifsTeam.getGoalsAgainstAwayForm()
+        );
     }
 }
