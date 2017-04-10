@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class PlayerStatistics {
     private String playerId;
+    private String playerName;
     private String stageName;
     private String stageId;
     private String teamName;
@@ -19,10 +20,12 @@ public class PlayerStatistics {
     private int redCards;
     private int yellowCards;
 
-    public PlayerStatistics() {}
+    public PlayerStatistics() {
+    }
 
-    public PlayerStatistics(String playerId, String stageName, String stageId, String teamName, String teamId, int goals, int assists, int redCards, int yellowCards) {
+    public PlayerStatistics(String playerId, String playerName, String stageName, String stageId, String teamName, String teamId, int goals, int assists, int redCards, int yellowCards) {
         this.playerId = playerId;
+        this.playerName = playerName;
         this.stageName = stageName;
         this.stageId = stageId;
         this.teamName = teamName;
@@ -103,5 +106,20 @@ public class PlayerStatistics {
 
     public void setPlayerId(String playerId) {
         this.playerId = playerId;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public boolean hasValue() {
+        return goals != 0 ||
+                assists != 0 ||
+                redCards != 0 ||
+                yellowCards != 0;
     }
 }

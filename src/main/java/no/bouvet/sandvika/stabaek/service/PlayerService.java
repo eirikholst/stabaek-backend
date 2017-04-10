@@ -52,12 +52,13 @@ public class PlayerService implements ClearableService{
     }
 
     @Transactional
-    public List<PlayerStatistics> getPlayersStatistics(String playerId, String stageId) {
+    public List<PlayerStatistics> getPlayersStatistics(String playerId, String stageId, boolean omitZeros) {
         return getAllPlayers().stream()
                 .filter(player -> playerId == null || player.getId().equals(playerId))
                 .map(Player::getPlayerStatistics)
                 .flatMap(Collection::stream)
                 .filter(playerStatistics -> stageId == null || playerStatistics.getStageId().equals(stageId))
+                .filter(playerStatistics -> !omitZeros || playerStatistics.hasValue())
                 .collect(Collectors.toList());
     }
 }
