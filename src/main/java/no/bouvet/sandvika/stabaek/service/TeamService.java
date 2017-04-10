@@ -17,24 +17,29 @@ public class TeamService implements ClearableService{
     public TeamService() {
     }
 
+    @Transactional
     public List<Team> getAllTeams() {
         ArrayList teams = new ArrayList();
         this.teamRepository.findAll().forEach(teams::add);
         return teams;
     }
 
+    @Transactional
     public void addTeam(Team team) {
         this.teamRepository.save(team);
     }
 
+    @Transactional
     public Team getTeam(String id) {
         return teamRepository.findOne(id);
     }
 
+    @Transactional
     public List<Team> getTeamByTeamName(String teamName) {
         return teamRepository.findByName(teamName);
     }
 
+    @Transactional
     public void clearDb() {
         this.teamRepository.deleteAll();
     }

@@ -8,6 +8,7 @@ import no.bouvet.sandvika.stabaek.nifs.NifsTeam;
 import no.bouvet.sandvika.stabaek.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
@@ -158,7 +159,7 @@ public class AdminService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void initTest() {
         NifsTeam stabaekNifsTeam = nifsService.getNifsTeam(4);
 
