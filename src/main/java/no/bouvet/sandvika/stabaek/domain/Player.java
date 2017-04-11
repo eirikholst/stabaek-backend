@@ -1,6 +1,7 @@
 package no.bouvet.sandvika.stabaek.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import no.bouvet.sandvika.stabaek.domain.team.Team;
 
 import javax.persistence.*;
 import java.util.List;

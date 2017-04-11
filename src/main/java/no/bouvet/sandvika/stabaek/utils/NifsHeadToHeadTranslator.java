@@ -2,7 +2,7 @@ package no.bouvet.sandvika.stabaek.utils;
 
 import no.bouvet.sandvika.stabaek.domain.Fixture;
 import no.bouvet.sandvika.stabaek.domain.HeadToHead;
-import no.bouvet.sandvika.stabaek.domain.Team;
+import no.bouvet.sandvika.stabaek.domain.team.Team;
 import no.bouvet.sandvika.stabaek.nifs.NifsHeadToHead;
 
 import java.util.Arrays;

@@ -1,7 +1,7 @@
 package no.bouvet.sandvika.stabaek.controller;
 
 import java.util.List;
-import no.bouvet.sandvika.stabaek.domain.Team;
+import no.bouvet.sandvika.stabaek.domain.team.Team;
 import no.bouvet.sandvika.stabaek.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

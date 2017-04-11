@@ -5,8 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import javax.persistence.*;
 
-import no.bouvet.sandvika.stabaek.domain.Fixture;
-import no.bouvet.sandvika.stabaek.domain.Team;
+import no.bouvet.sandvika.stabaek.domain.team.Team;
 
 @Entity
 public class Stadium {

@@ -88,6 +88,18 @@ public class NifsTeam {
     private int goalsForAwayForm;
     private int goalsAgainstAwayForm;
 
+    private int place;
+    private int played;
+    private int won;
+    private int draw;
+    private int lost;
+    private int goalsScored;
+    private int goalsConceded;
+    private int goalDifference;
+    private int points;
+    private String lastSixMatches;
+    private int changeSinceLastRound;
+
     public NifsTeam() {
     }
 
@@ -441,5 +453,93 @@ public class NifsTeam {
 
     public void setGoalsAgainstAwayForm(int goalsAgainstAwayForm) {
         this.goalsAgainstAwayForm = goalsAgainstAwayForm;
+    }
+
+    public int getPlace() {
+        return place;
+    }
+
+    public void setPlace(int place) {
+        this.place = place;
+    }
+
+    public int getPlayed() {
+        return played;
+    }
+
+    public void setPlayed(int played) {
+        this.played = played;
+    }
+
+    public int getWon() {
+        return won;
+    }
+
+    public void setWon(int won) {
+        this.won = won;
+    }
+
+    public int getDraw() {
+        return draw;
+    }
+
+    public void setDraw(int draw) {
+        this.draw = draw;
+    }
+
+    public int getLost() {
+        return lost;
+    }
+
+    public void setLost(int lost) {
+        this.lost = lost;
+    }
+
+    public int getGoalsScored() {
+        return goalsScored;
+    }
+
+    public void setGoalsScored(int goalsScored) {
+        this.goalsScored = goalsScored;
+    }
+
+    public int getGoalsConceded() {
+        return goalsConceded;
+    }
+
+    public void setGoalsConceded(int goalsConceded) {
+        this.goalsConceded = goalsConceded;
+    }
+
+    public int getGoalDifference() {
+        return goalDifference;
+    }
+
+    public void setGoalDifference(int goalDifference) {
+        this.goalDifference = goalDifference;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public String getLastSixMatches() {
+        return lastSixMatches;
+    }
+
+    public void setLastSixMatches(String lastSixMatches) {
+        this.lastSixMatches = lastSixMatches;
+    }
+
+    public int getChangeSinceLastRound() {
+        return changeSinceLastRound;
+    }
+
+    public void setChangeSinceLastRound(int changeSinceLastRound) {
+        this.changeSinceLastRound = changeSinceLastRound;
     }
 }

@@ -1,14 +1,11 @@
 package no.bouvet.sandvika.stabaek.utils;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import no.bouvet.sandvika.stabaek.domain.Team;
-import no.bouvet.sandvika.stabaek.domain.TeamInHeadToHeadModus;
+import no.bouvet.sandvika.stabaek.domain.team.Team;
+import no.bouvet.sandvika.stabaek.domain.team.TeamInHeadToHeadModus;
+import no.bouvet.sandvika.stabaek.domain.team.TeamInTableModus;
 import no.bouvet.sandvika.stabaek.nifs.NifsImage;
-import no.bouvet.sandvika.stabaek.nifs.NifsPerson;
 import no.bouvet.sandvika.stabaek.nifs.NifsTeam;
 
 public class NifsTeamTranslator {
@@ -50,6 +47,26 @@ public class NifsTeamTranslator {
                 nifsTeam.getLostAwayForm(),
                 nifsTeam.getGoalsForAwayForm(),
                 nifsTeam.getGoalsAgainstAwayForm()
+        );
+    }
+
+    public static TeamInTableModus getTeamInTableModus(NifsTeam nifsTeam) {
+        return new TeamInTableModus(
+                Integer.toString(nifsTeam.getId()),
+                nifsTeam.getName(),
+                nifsTeam.getUrl(),
+                nifsTeam.getPlace(),
+                nifsTeam.getPlayed(),
+                nifsTeam.getWon(),
+                nifsTeam.getDraw(),
+                nifsTeam.getLost(),
+                nifsTeam.getGoalsScored(),
+                nifsTeam.getGoalsConceded(),
+                nifsTeam.getGoalDifference(),
+                nifsTeam.getPoints(),
+                nifsTeam.getLastSixMatches(),
+                nifsTeam.getChangeSinceLastRound(),
+                nifsTeam.getLastSixMatches()
         );
     }
 }

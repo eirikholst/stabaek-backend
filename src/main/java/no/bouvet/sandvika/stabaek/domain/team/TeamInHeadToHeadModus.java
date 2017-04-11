@@ -1,4 +1,4 @@
-package no.bouvet.sandvika.stabaek.domain;
+package no.bouvet.sandvika.stabaek.domain.team;
 
 public class TeamInHeadToHeadModus extends Team{
 
@@ -63,79 +63,159 @@ public class TeamInHeadToHeadModus extends Team{
         return wonHome;
     }
 
+    public void setWonHome(int wonHome) {
+        this.wonHome = wonHome;
+    }
+
     public int getDrawnHome() {
         return drawnHome;
+    }
+
+    public void setDrawnHome(int drawnHome) {
+        this.drawnHome = drawnHome;
     }
 
     public int getLostHome() {
         return lostHome;
     }
 
+    public void setLostHome(int lostHome) {
+        this.lostHome = lostHome;
+    }
+
     public int getGoalsForHome() {
         return goalsForHome;
+    }
+
+    public void setGoalsForHome(int goalsForHome) {
+        this.goalsForHome = goalsForHome;
     }
 
     public int getGoalsAgainstHome() {
         return goalsAgainstHome;
     }
 
+    public void setGoalsAgainstHome(int goalsAgainstHome) {
+        this.goalsAgainstHome = goalsAgainstHome;
+    }
+
     public int getWonAway() {
         return wonAway;
+    }
+
+    public void setWonAway(int wonAway) {
+        this.wonAway = wonAway;
     }
 
     public int getDrawnAway() {
         return drawnAway;
     }
 
+    public void setDrawnAway(int drawnAway) {
+        this.drawnAway = drawnAway;
+    }
+
     public int getLostAway() {
         return lostAway;
+    }
+
+    public void setLostAway(int lostAway) {
+        this.lostAway = lostAway;
     }
 
     public int getGoalsForAway() {
         return goalsForAway;
     }
 
+    public void setGoalsForAway(int goalsForAway) {
+        this.goalsForAway = goalsForAway;
+    }
+
     public int getGoalsAgainstAway() {
         return goalsAgainstAway;
+    }
+
+    public void setGoalsAgainstAway(int goalsAgainstAway) {
+        this.goalsAgainstAway = goalsAgainstAway;
     }
 
     public int getWonHomeForm() {
         return wonHomeForm;
     }
 
+    public void setWonHomeForm(int wonHomeForm) {
+        this.wonHomeForm = wonHomeForm;
+    }
+
     public int getDrawnHomeForm() {
         return drawnHomeForm;
+    }
+
+    public void setDrawnHomeForm(int drawnHomeForm) {
+        this.drawnHomeForm = drawnHomeForm;
     }
 
     public int getLostHomeForm() {
         return lostHomeForm;
     }
 
+    public void setLostHomeForm(int lostHomeForm) {
+        this.lostHomeForm = lostHomeForm;
+    }
+
     public int getGoalsForHomeForm() {
         return goalsForHomeForm;
+    }
+
+    public void setGoalsForHomeForm(int goalsForHomeForm) {
+        this.goalsForHomeForm = goalsForHomeForm;
     }
 
     public int getGoalsAgainstHomeFor() {
         return goalsAgainstHomeFor;
     }
 
+    public void setGoalsAgainstHomeFor(int goalsAgainstHomeFor) {
+        this.goalsAgainstHomeFor = goalsAgainstHomeFor;
+    }
+
     public int getWonAwayForm() {
         return wonAwayForm;
+    }
+
+    public void setWonAwayForm(int wonAwayForm) {
+        this.wonAwayForm = wonAwayForm;
     }
 
     public int getDrawnAwayForm() {
         return drawnAwayForm;
     }
 
+    public void setDrawnAwayForm(int drawnAwayForm) {
+        this.drawnAwayForm = drawnAwayForm;
+    }
+
     public int getLostAwayForm() {
         return lostAwayForm;
+    }
+
+    public void setLostAwayForm(int lostAwayForm) {
+        this.lostAwayForm = lostAwayForm;
     }
 
     public int getGoalsForAwayForm() {
         return goalsForAwayForm;
     }
 
+    public void setGoalsForAwayForm(int goalsForAwayForm) {
+        this.goalsForAwayForm = goalsForAwayForm;
+    }
+
     public int getGoalsAgainstAwayForm() {
         return goalsAgainstAwayForm;
+    }
+
+    public void setGoalsAgainstAwayForm(int goalsAgainstAwayForm) {
+        this.goalsAgainstAwayForm = goalsAgainstAwayForm;
     }
 }

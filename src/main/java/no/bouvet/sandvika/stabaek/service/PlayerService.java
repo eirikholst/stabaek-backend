@@ -2,7 +2,7 @@ package no.bouvet.sandvika.stabaek.service;
 
 import no.bouvet.sandvika.stabaek.domain.Player;
 import no.bouvet.sandvika.stabaek.domain.PlayerStatistics;
-import no.bouvet.sandvika.stabaek.domain.Team;
+import no.bouvet.sandvika.stabaek.domain.team.Team;
 import no.bouvet.sandvika.stabaek.repository.PlayerRepository;
 import no.bouvet.sandvika.stabaek.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;

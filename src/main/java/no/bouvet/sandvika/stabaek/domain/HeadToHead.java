@@ -1,5 +1,7 @@
 package no.bouvet.sandvika.stabaek.domain;
 
+import no.bouvet.sandvika.stabaek.domain.team.Team;
+
 import java.util.List;
 
 public class HeadToHead {

@@ -1,6 +1,7 @@
 package no.bouvet.sandvika.stabaek.service;
 
 import no.bouvet.sandvika.stabaek.domain.*;
+import no.bouvet.sandvika.stabaek.domain.team.Team;
 import org.hibernate.Hibernate;
 import org.junit.Before;
 import org.junit.Test;

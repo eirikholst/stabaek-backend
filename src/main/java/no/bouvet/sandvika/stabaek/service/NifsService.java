@@ -71,4 +71,9 @@ public class NifsService {
         String restUrl = nifsBaseUrl + "/matches/" + id + "/headToHead";
         return restTemplate.getForObject(restUrl, NifsHeadToHead.class);
     }
+
+    public NifsTable getNifsTable(){
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(eliteserienUrl + "/table", NifsTable.class);
+    }
 }

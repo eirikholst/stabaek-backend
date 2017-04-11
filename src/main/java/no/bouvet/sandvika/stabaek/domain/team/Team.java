@@ -1,6 +1,9 @@
-package no.bouvet.sandvika.stabaek.domain;
+package no.bouvet.sandvika.stabaek.domain.team;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import no.bouvet.sandvika.stabaek.domain.Fixture;
+import no.bouvet.sandvika.stabaek.domain.Player;
+import no.bouvet.sandvika.stabaek.domain.Stadium;
 
 import java.util.List;
 import java.util.Set;
