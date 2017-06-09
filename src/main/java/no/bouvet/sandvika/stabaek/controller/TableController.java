@@ -16,13 +16,13 @@ public class TableController {
     @Autowired
     private TableService tableService;
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping({"/table"})
     public Table getTable() {
         return this.tableService.getTable();
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping({"/table/teams"})
     public List<TeamInTableModus> getTableTeams() {
         return this.tableService.getTable().getTeams();

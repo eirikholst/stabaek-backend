@@ -1,0 +1,20 @@
+server:
+  port: 8888
+
+security:
+  basic:
+    enabled: true
+    path: /admin/**
+  user:
+    name: admin
+    password: stb
+    role: ADMIN
+
+spring:
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:mysql://mysql:3306/stabaek
+    password: ultrasecretpassword

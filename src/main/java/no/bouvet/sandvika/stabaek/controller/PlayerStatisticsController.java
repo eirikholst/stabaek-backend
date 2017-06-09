@@ -16,7 +16,7 @@ public class PlayerStatisticsController {
     @Autowired
     private PlayerService playerService;
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping("/playerStatistics")
     public List<PlayerStatistics> getAllPlayerStatistics(
             @RequestParam(required = false, value = "playerId") String playerId,

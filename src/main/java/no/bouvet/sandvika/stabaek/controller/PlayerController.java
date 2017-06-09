@@ -17,25 +17,25 @@ public class PlayerController {
     private PlayerService playerService;
 
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping("/players")
     public List<Player> getAllPlayers(){
         return playerService.getAllPlayers();
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping("/players/{id}")
     public Player getPlayer(@PathVariable(name = "id") String id){
         return playerService.getPlayer(id);
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping("/teams/{id}/players")
     public List<Player> getPlayersFromTeam(@PathVariable(name = "id") String id){
         return playerService.getPlayersFromTeam(id);
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping("/teams/{teamId}/players/{playerId}")
     public Player getPlayerFromTeam(@PathVariable(name = "playerId") String id){
         return playerService.getPlayer(id);

@@ -17,19 +17,19 @@ public class TeamController {
     public TeamController() {
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping({"/teams"})
     public List<Team> getAllTeams() {
         return this.teamService.getAllTeams();
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping({"/teams/{id}"})
     public Team getTeam(@PathVariable("id") String id) {
         return this.teamService.getTeam(id);
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping("/teams/name={teamName}")
     public List<Team> getTeamByName(@PathVariable("teamName") String teamName){
         return this.teamService.getTeamByTeamName(teamName);

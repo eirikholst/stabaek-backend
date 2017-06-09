@@ -17,13 +17,13 @@ public class StadiumController {
     public StadiumController() {
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping({"/stadiums"})
     public List<Stadium> getAllStadiums() {
         return this.stadiumService.getAllStadiums();
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "*")
     @RequestMapping({"/stadiums/{id}"})
     public Stadium getAllStadiums(@PathVariable("id") String id) {
         return this.stadiumService.getStadium(id);
