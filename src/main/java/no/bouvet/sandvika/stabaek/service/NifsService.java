@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Service
 public class NifsService {
 
-    private String eliteserienUrl = "https://api.nifs.no/countries/1/tournaments/5/stages/673879";
+    private String eliteserienUrl = "https://api.nifs.no/countries/1/tournaments/5/stages/676155";
     private String nifsBaseUrl = "https://api.nifs.no";
 
     List<NifsTeam> getAllTeamsFromEliteserien(){
