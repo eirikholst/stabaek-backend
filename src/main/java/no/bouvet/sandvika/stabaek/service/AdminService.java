@@ -43,7 +43,6 @@ public class AdminService {
 
     private void initAllTransactional() {
         this.initNifsTeams();
-        th
         this.initTeams();
         this.initPlayers();
         this.initStadiums();

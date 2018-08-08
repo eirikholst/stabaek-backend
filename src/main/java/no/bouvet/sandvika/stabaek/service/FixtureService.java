@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FixtureService implements ClearableService{
@@ -50,7 +51,7 @@ public class FixtureService implements ClearableService{
     }
 
     public Fixture getFixture(String id) {
-        return fixtureRepository.findOne(id);
+        return fixtureRepository.findById(id).orElse(null);
     }
 
     public void clearDb() {

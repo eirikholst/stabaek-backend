@@ -37,13 +37,13 @@ public class PlayerService implements ClearableService{
 
     @Transactional
     public Player getPlayer(String id) {
-        return playerRepository.findOne(id);
+        return playerRepository.findById(id).orElse(null);
     }
 
     @Transactional
     public List<Player> getPlayersFromTeam(String id) {
-        Team team = teamRepository.findOne(id);
-        return team.getPlayers().stream().collect(Collectors.toList());
+        Team team = teamRepository.findById(id).orElse(null);
+        return new ArrayList<>(team != null ? team.getPlayers() : new ArrayList<>());
     }
 
     @Transactional

@@ -27,7 +27,7 @@ public class StadiumService implements ClearableService{
     }
 
     public Stadium getStadium(String id) {
-        return this.stadiumRepository.findOne(id);
+        return this.stadiumRepository.findById(id).orElse(null);
     }
 
     public void clearDb() {

@@ -1,6 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 .gitignore
 .idea/*
+.idea
 bash.exe.stackdump
 src/main/resources/static/
 src/main/resources/templates/

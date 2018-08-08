@@ -31,7 +31,7 @@ public class TeamService implements ClearableService{
 
     @Transactional
     public Team getTeam(String id) {
-        return teamRepository.findOne(id);
+        return teamRepository.findById(id).orElse(null);
     }
 
     @Transactional
