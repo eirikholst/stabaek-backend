@@ -17,7 +17,7 @@ public class NifsStageStatisticsTranslator {
         String playerName = nifsPerson.getFirstName() + " " + nifsPerson.getLastName();
         if(nifsStage == null || nifsTeam == null) return null;
         return new PlayerStatistics(
-                Integer.toString(nifsPerson.getId()),
+                nifsPerson.getId(),
                 playerName,
                 nifsStage.getFullName(),
                 Integer.toString(nifsStage.getId()),

@@ -7,22 +7,22 @@ import no.bouvet.sandvika.stabaek.domain.team.TeamInTableModus;
 import java.util.List;
 
 public class Table {
-    private String id;
+    private int id;
     private List<TeamInTableModus> teams;
 
     public Table() {
     }
 
-    public Table(String id, List<TeamInTableModus> teams) {
+    public Table(int id, List<TeamInTableModus> teams) {
         this.id = id;
         this.teams = teams;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

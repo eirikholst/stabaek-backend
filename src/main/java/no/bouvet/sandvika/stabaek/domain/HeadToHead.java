@@ -6,7 +6,7 @@ import java.util.List;
 
 public class HeadToHead {
 
-    private String id;
+    private int id;
     private List<Team> teams;
     private List<Fixture> previousFixtures;
     private List<Fixture> previousFixturesOtherTournaments;
@@ -14,18 +14,18 @@ public class HeadToHead {
     public HeadToHead() {
     }
 
-    public HeadToHead(String id, List<Team> teams, List<Fixture> previousFixtures, List<Fixture> previousFixturesOtherTournaments) {
+    public HeadToHead(int id, List<Team> teams, List<Fixture> previousFixtures, List<Fixture> previousFixturesOtherTournaments) {
         this.id = id;
         this.teams = teams;
         this.previousFixtures = previousFixtures;
         this.previousFixturesOtherTournaments = previousFixturesOtherTournaments;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

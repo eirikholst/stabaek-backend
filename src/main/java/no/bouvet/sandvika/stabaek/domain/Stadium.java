@@ -10,7 +10,7 @@ import no.bouvet.sandvika.stabaek.domain.team.Team;
 @Entity
 public class Stadium {
     @Id
-    private String id;
+    private int id;
     private String name;
     @ManyToOne(
             fetch = FetchType.LAZY
@@ -28,18 +28,18 @@ public class Stadium {
     public Stadium() {
     }
 
-    public Stadium(String id, String name, String teamId, String stadiumImageUrl) {
+    public Stadium(int id, String name, int teamId, String stadiumImageUrl) {
         this.id = id;
         this.name = name;
         this.team = new Team(teamId, "", "");
         this.stadiumImageUrl = stadiumImageUrl;
     }
 
-    public String getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

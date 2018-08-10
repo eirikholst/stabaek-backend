@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 public class Player {
     @Id
-    private String id;
+    private int id;
     private String firstName;
     private String lastName;
     private String position;
@@ -17,7 +17,7 @@ public class Player {
     @ManyToOne
     @JsonBackReference
     private Team team;
-    private String teamIdString;
+//    private int teamId;
     private String teamName;
     private String profilePictureUrl;
     @Embedded
@@ -36,26 +36,26 @@ public class Player {
 
     public Player(){}
 
-    public Player(String id, String firstName, String lastName,
-                  String position, String teamId, int number, String profilePictureUrl,
+    public Player(int id, String firstName, String lastName,
+                  String position, int teamId, int number, String profilePictureUrl,
                   List<Transfer> transfers, List<PlayerStatistics> playerStatistics) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
         this.team = new Team(teamId, "", "");
-        this.teamIdString = teamId;
+//        this.teamId = teamId;
         this.number = number;
         this.profilePictureUrl = profilePictureUrl;
         this.transfers = transfers;
         this.playerStatistics = playerStatistics;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -112,13 +112,13 @@ public class Player {
         this.profilePictureUrl = profilePictureUrl;
     }
 
-    public String getTeamIdString() {
-        return teamIdString;
-    }
-
-    public void setTeamIdString(String teamIdString) {
-        this.teamIdString = teamIdString;
-    }
+//    public int getTeamId() {
+//        return teamId;
+//    }
+//
+//    public void setTeamId(int teamId) {
+//        this.teamId = teamId;
+//    }
 
     public List<Transfer> getTransfers() {
         return transfers;

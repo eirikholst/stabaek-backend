@@ -15,8 +15,6 @@ public class NifsHeadToHeadTranslator {
         if(nifsHeadToHead == null)
             return null;
 
-        String id = Integer.toString(nifsHeadToHead.getId());
-
         List<Team> teams = Arrays.stream(nifsHeadToHead.getTeams())
                 .map(NifsTeamTranslator::getTeamInHeadToHeadModus)
                 .collect(Collectors.toList());
@@ -29,7 +27,7 @@ public class NifsHeadToHeadTranslator {
                 ? getPreviousFixturesFromOtherTournaments(nifsHeadToHead)
                 : null;
 
-        return new HeadToHead(id, teams, previousFixtures, previousFixturesFormOtherTournaments);
+        return new HeadToHead(nifsHeadToHead.getId(), teams, previousFixtures, previousFixturesFormOtherTournaments);
     }
 
     private static List<Fixture> getPreviousFixtures(NifsHeadToHead nifsHeadToHead) {

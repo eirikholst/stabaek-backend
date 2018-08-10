@@ -6,14 +6,14 @@ import javax.persistence.Embeddable;
 public class Transfer {
     private String fromTeamName;
     private String toTeamName;
-    private String fromTeamId;
-    private String toTeamId;
+    private int fromTeamId;
+    private int toTeamId;
     private String date;
 
     public Transfer() {
     }
 
-    public Transfer(String fromTeamName, String toTeamName, String fromTeamId, String toTeamId, String date) {
+    public Transfer(String fromTeamName, String toTeamName, int fromTeamId, int toTeamId, String date) {
         this.fromTeamName = fromTeamName;
         this.toTeamName = toTeamName;
         this.fromTeamId = fromTeamId;
@@ -37,19 +37,19 @@ public class Transfer {
         this.toTeamName = toTeamName;
     }
 
-    public String getFromTeamId() {
+    public int getFromTeamId() {
         return fromTeamId;
     }
 
-    public void setFromTeamId(String fromTeamId) {
+    public void setFromTeamId(int fromTeamId) {
         this.fromTeamId = fromTeamId;
     }
 
-    public String getToTeamId() {
+    public int getToTeamId() {
         return toTeamId;
     }
 
-    public void setToTeamId(String toTeamId) {
+    public void setToTeamId(int toTeamId) {
         this.toTeamId = toTeamId;
     }
 

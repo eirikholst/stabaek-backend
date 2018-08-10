@@ -3,16 +3,20 @@ package no.bouvet.sandvika.stabaek.service;
 import no.bouvet.sandvika.stabaek.domain.Player;
 import no.bouvet.sandvika.stabaek.nifs.NifsMatch;
 import no.bouvet.sandvika.stabaek.nifs.NifsPerson;
-import no.bouvet.sandvika.stabaek.nifs.NifsStageStatistics;
 import no.bouvet.sandvika.stabaek.nifs.NifsTeam;
-import no.bouvet.sandvika.stabaek.utils.*;
+import no.bouvet.sandvika.stabaek.utils.NifsMatchTranslator;
+import no.bouvet.sandvika.stabaek.utils.NifsPlayerTranslator;
+import no.bouvet.sandvika.stabaek.utils.NifsStadiumTranslator;
+import no.bouvet.sandvika.stabaek.utils.NifsTeamTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.ConstraintViolationException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,30 +35,12 @@ public class AdminService {
     @Autowired
     private NifsService nifsService;
 
-    @Transactional
     public void initAll() {
-        try {
-            initAllTransactional();
-        } catch (ConstraintViolationException ex) {
-            clearAll();
-            initAllTransactional();
-        }
-    }
-
-    private void initAllTransactional() {
-        this.initNifsTeams();
-        this.initTeams();
-        this.initPlayers();
-        this.initStadiums();
-        this.initFixtures();
-    }
-
-    public void clearAll() {
-        this.clearFixtureDb();
-        this.clearStadiumDb();
-        this.clearPlayerDb();
-        this.clearTeamDb();
-        this.clearNifsTeamDb();
+		this.initNifsTeams();
+		this.initTeams();
+		this.initPlayers();
+		this.initStadiums();
+		this.initFixtures();
     }
 
     public void updateTeams() {
@@ -107,8 +93,6 @@ public class AdminService {
 
     private void initStadiums() {
         NifsStadiumTranslator.getStadiums(getAllNifsTeams()).forEach(stadiumService::addStadium);
-        //Add Ullevål to team våelerenga
-        stadiumService.addStadium(NifsStadiumTranslator.getStadium(nifsService.getStadium("7937"), "15"));
     }
 
     private void initFixtures() {
@@ -132,12 +116,12 @@ public class AdminService {
             nifsTeams = nifsTeamService.getAllNifsTeams();
         }
         if (nifsTeams == null || nifsTeams.size() == 0)
-            throw new RuntimeException("Could not get Nifs teams! Check REST API call 'https://api.nifs.no/countries/1/tournaments/5/stages/673879/teams'");
+			throw new RuntimeException("Could not get Nifs teams! Check REST API call 'https://api.nifs.no/countries/1/tournaments/5/stages/????/teams'");
         return nifsTeams;
     }
 
     private List<NifsPerson> getNifsPeople(NifsTeam nifsTeam) {
-        return nifsTeam.getPlayers().stream()
+		return nifsTeam.getPlayers().stream()
                 .map(NifsPerson::getId)
                 .map(id -> Integer.toString(id))
                 .map(id -> nifsService.getPerson(id))
@@ -154,7 +138,7 @@ public class AdminService {
 
     private List<NifsPerson> getCompactNifsPeople() {
         return getAllNifsTeams().stream()
-                .map(NifsTeam::getPlayers)
+			.map(NifsTeam::getPlayers)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }

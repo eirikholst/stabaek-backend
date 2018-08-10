@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 public class Team {
     @Id
-    private String id;
+    private int id;
     private String name;
     @OneToMany(
             mappedBy = "team"
@@ -43,17 +43,17 @@ public class Team {
     public Team() {
     }
 
-    public Team(String id, String name, String teamLogoUrl) {
+    public Team(int id, String name, String teamLogoUrl) {
         this.id = id;
         this.name = name;
         this.teamLogoUrl = teamLogoUrl;
     }
 
-    public String getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -106,7 +106,7 @@ public class Team {
                 : (teamName.equals("strømsgodset") ? "Marienlyst Stadion"
                 : (teamName.equals("tromsø") ? "Alfheim Stadion"
                 : (teamName.equals("viking") ? "Viking Stadion"
-                : (teamName.equals("vålerenga") ? "Ullevål Stadion"
+                : (teamName.equals("vålerenga") ? "Intility Arena"
                 : teamName + "Stadion")))))))))))))));
     }
 

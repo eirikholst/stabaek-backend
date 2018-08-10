@@ -33,7 +33,7 @@ public class NifsTeam {
     private NifsImage logo;
     @Embedded
     @ElementCollection
-    @CollectionTable(name = "stadiums")
+    @CollectionTable(name = "nifs_stadium")
     @OrderColumn
     @AttributeOverrides({
             @AttributeOverride(name = "type", column = @Column(name = "stadium_type")),
@@ -50,7 +50,7 @@ public class NifsTeam {
     private NifsHonour[] honours;
     @Embedded
     @ElementCollection
-    @CollectionTable(name = "players")
+    @CollectionTable(name = "nifs_person")
     @OrderColumn
     @AttributeOverrides({
             @AttributeOverride(name = "type", column = @Column(name = "person_type")),

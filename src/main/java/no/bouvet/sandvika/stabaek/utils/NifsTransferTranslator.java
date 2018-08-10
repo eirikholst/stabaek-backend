@@ -14,8 +14,8 @@ public class NifsTransferTranslator {
         return new Transfer(
                 nifsTransfer.getFromTeam().getName(),
                 nifsTransfer.getToTeam().getName(),
-                Integer.toString(nifsTransfer.getFromTeam().getId()),
-                Integer.toString(nifsTransfer.getToTeam().getId()),
+                nifsTransfer.getFromTeam().getId(),
+                nifsTransfer.getToTeam().getId(),
                 nifsTransfer.getDate()
         );
     }
@@ -24,7 +24,6 @@ public class NifsTransferTranslator {
         if(transfers == null) return null;
         return Arrays.stream(transfers)
                 .map(NifsTransferTranslator::getTransfer)
-                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 }

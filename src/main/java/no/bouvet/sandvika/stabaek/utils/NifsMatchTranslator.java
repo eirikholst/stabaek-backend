@@ -1,7 +1,5 @@
 package no.bouvet.sandvika.stabaek.utils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -16,12 +14,11 @@ public class NifsMatchTranslator {
 
     public static Fixture getFixture(NifsMatch nifsMatch) {
         try {
-            String id = Integer.toString(nifsMatch.getId());
-            String nonCompactHomeTeamId = nifsMatch.getHomeTeam() != null ? Integer.toString(nifsMatch.getHomeTeam().getId()) : null;
-            String nonCompactAwayTeamId = nifsMatch.getAwayTeam() != null ? Integer.toString(nifsMatch.getAwayTeam().getId()) : null;
-            String nonCompactStadiumId = nifsMatch.getStadium() != null ? Integer.toString(nifsMatch.getStadium().getId()) : null;
+            int nonCompactHomeTeamId = nifsMatch.getHomeTeam() != null ? nifsMatch.getHomeTeam().getId() : -1;
+            int nonCompactAwayTeamId = nifsMatch.getAwayTeam() != null ? nifsMatch.getAwayTeam().getId() : -1;
+            int nonCompactStadiumId = nifsMatch.getStadium() != null ? nifsMatch.getStadium().getId() : -1;
 
-            Fixture fixture = new Fixture(id, nifsMatch.getTimestamp(), nonCompactHomeTeamId, nonCompactAwayTeamId, nonCompactStadiumId);
+            Fixture fixture = new Fixture(nifsMatch.getId(), nifsMatch.getTimestamp(), nonCompactHomeTeamId, nonCompactAwayTeamId, nonCompactStadiumId);
 
             NifsTeam homeTeam = nifsMatch.getHomeTeam();
             NifsTeam awayTeam = nifsMatch.getAwayTeam();
@@ -66,7 +63,6 @@ public class NifsMatchTranslator {
         return nifsTeam.getPlayers().stream()
                 .filter(NifsPerson::isStartsMatch)
                 .map(nifsPerson -> NifsPlayerTranslator.getPlayer(nifsPerson, nifsTeam))
-                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 

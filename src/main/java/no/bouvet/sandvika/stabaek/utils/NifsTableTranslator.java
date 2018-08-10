@@ -13,11 +13,10 @@ public class NifsTableTranslator {
 
     public static Table getTable(NifsTable nifsTable){
         if(nifsTable == null) return null;
-        String id = Integer.toString(nifsTable.getId());
         List<TeamInTableModus> teams = Arrays.stream(nifsTable.getTeams())
                 .map(NifsTeamTranslator::getTeamInTableModus)
                 .collect(Collectors.toList());
-        return new Table(id, teams);
+        return new Table(nifsTable.getId(), teams);
     }
 
 }

@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 
 @Embeddable
 public class PlayerStatistics {
-    private String playerId;
+    private int playerId;
     private String playerName;
     private String stageName;
     private String stageId;
@@ -23,7 +23,7 @@ public class PlayerStatistics {
     public PlayerStatistics() {
     }
 
-    public PlayerStatistics(String playerId, String playerName, String stageName, String stageId, String teamName, String teamId, int goals, int assists, int redCards, int yellowCards) {
+    public PlayerStatistics(int playerId, String playerName, String stageName, String stageId, String teamName, String teamId, int goals, int assists, int redCards, int yellowCards) {
         this.playerId = playerId;
         this.playerName = playerName;
         this.stageName = stageName;
@@ -100,11 +100,11 @@ public class PlayerStatistics {
         this.yellowCards = yellowCards;
     }
 
-    public String getPlayerId() {
+    public int getPlayerId() {
         return playerId;
     }
 
-    public void setPlayerId(String playerId) {
+    public void setPlayerId(int playerId) {
         this.playerId = playerId;
     }
 

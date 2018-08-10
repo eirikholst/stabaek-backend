@@ -1,20 +1,24 @@
 server:
   port: 8888
 
-security:
-  basic:
-    enabled: true
-    path: /admin/**
-  user:
-    name: admin
-    password: stb
-    role: ADMIN
+#security:
+#  basic:
+#    enabled: true
+#    path: /admin/**
+#  user:
+#    name: admin
+#    password: stb
+#    role: ADMIN
 
 spring:
   jpa:
     database: MYSQL
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
   datasource:
-    url: jdbc:mysql://mysql:3306/stabaek
+    url: jdbc:mysql://localhost:3306/stabaek
+    username: eirik
     password: ultrasecretpassword

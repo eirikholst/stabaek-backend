@@ -26,7 +26,7 @@ public class TeamInHeadToHeadModus extends Team{
     public TeamInHeadToHeadModus() {
     }
 
-    public TeamInHeadToHeadModus(String id, String name, String teamLogoUrl,
+    public TeamInHeadToHeadModus(int id, String name, String teamLogoUrl,
                                  int wonHome, int drawnHome, int lostHome,
                                  int goalsForHome, int goalsAgainstHome,
                                  int wonAway, int drawnAway, int lostAway,

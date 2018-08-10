@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Fixture {
     @Id
-    private String id;
+    private int id;
 
     @ManyToOne
     @JsonBackReference
@@ -25,7 +25,7 @@ public class Fixture {
     @ManyToOne
     @JsonBackReference
     private Stadium stadium;
-    private String stadiumIdString;
+//    private int stadiumId;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Transient
@@ -66,20 +66,20 @@ public class Fixture {
     public Fixture() {
     }
 
-    public Fixture(String id, Date date, String homeTeamId, String awayTeamId, String stadiumId){
+    public Fixture(int id, Date date, int homeTeamId, int awayTeamId, int stadiumId){
         this.id = id;
         this.date = date;
         this.homeTeam = new Team(homeTeamId, "", "");
         this.awayTeam = new Team(awayTeamId, "" , "");
         this.stadium = new Stadium(stadiumId, "", homeTeamId, "");
-        this.stadiumIdString = stadiumId;
+//        this.stadiumId = stadiumId;
     }
 
-    public String getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -137,12 +137,12 @@ public class Fixture {
         return this.getHomeTeamNameString() + " - " + this.getAwayTeamNameString();
     }
 
-    public String getAwayTeamId() {
-        return this.awayTeam != null ? this.awayTeam.getId() : null;
+    public int getAwayTeamId() {
+        return this.awayTeam != null ? this.awayTeam.getId() : -1;
     }
 
-    public String getHomeTeamId() {
-        return this.homeTeam != null ? this.homeTeam.getId() : null;
+    public int getHomeTeamId() {
+        return this.homeTeam != null ? this.homeTeam.getId() : -1;
     }
 
 
@@ -162,13 +162,13 @@ public class Fixture {
         this.awayStartXI = awayStartXI;
     }
 
-    public String getStadiumIdString() {
-        return stadiumIdString;
-    }
-
-    public void setStadiumIdString(String stadiumIdString) {
-        this.stadiumIdString = stadiumIdString;
-    }
+//    public int getStadiumId() {
+//        return stadiumId;
+//    }
+//
+//    public void setStadiumId(int stadiumId) {
+//        this.stadiumId = stadiumId;
+//    }
 
     public int getHomeScore() {
         return homeScore;

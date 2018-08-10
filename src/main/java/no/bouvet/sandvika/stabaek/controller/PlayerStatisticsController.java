@@ -19,7 +19,7 @@ public class PlayerStatisticsController {
     @CrossOrigin(origins = "*")
     @RequestMapping("/playerStatistics")
     public List<PlayerStatistics> getAllPlayerStatistics(
-            @RequestParam(required = false, value = "playerId") String playerId,
+            @RequestParam(required = false, value = "playerId") int playerId,
             @RequestParam(required = false, value = "stageId") String stageId,
             @RequestParam(required = false, value = "hasValue") boolean hasValue
     ){

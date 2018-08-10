@@ -17,7 +17,7 @@ public class TeamInTableModus extends Team {
     public TeamInTableModus() {
     }
 
-    public TeamInTableModus(String id, String name, String teamLogoUrl,
+    public TeamInTableModus(int id, String name, String teamLogoUrl,
                             int place, int played, int won, int drawn, int lost,
                             int goalsScored, int goalsConceded, int goalDifference,
                             int points, String lastSixMatches, int changeSinceLastRound,

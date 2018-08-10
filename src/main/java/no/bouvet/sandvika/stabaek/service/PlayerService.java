@@ -52,9 +52,9 @@ public class PlayerService implements ClearableService{
     }
 
     @Transactional
-    public List<PlayerStatistics> getPlayersStatistics(String playerId, String stageId, boolean omitZeros) {
+    public List<PlayerStatistics> getPlayersStatistics(int playerId, String stageId, boolean omitZeros) {
         return getAllPlayers().stream()
-                .filter(player -> playerId == null || player.getId().equals(playerId))
+                .filter(player -> playerId == -1 || player.getId() == playerId)
                 .map(Player::getPlayerStatistics)
                 .flatMap(Collection::stream)
                 .filter(playerStatistics -> stageId == null || playerStatistics.getStageId().equals(stageId))

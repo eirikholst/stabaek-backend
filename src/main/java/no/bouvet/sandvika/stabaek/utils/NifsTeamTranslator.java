@@ -15,7 +15,7 @@ public class NifsTeamTranslator {
     public static Team getTeam(NifsTeam nifsTeam) {
         NifsImage teamLogo = nifsTeam.getLogo();
         String teamLogoUrl = teamLogo != null ? teamLogo.getUrl() : "";
-        return new Team(Integer.toString(nifsTeam.getId()), nifsTeam.getName(), teamLogoUrl);
+        return new Team(nifsTeam.getId(), nifsTeam.getName(), teamLogoUrl);
     }
 
     public static List<Team> getTeams(List<NifsTeam> nifsTeam) {
@@ -24,7 +24,7 @@ public class NifsTeamTranslator {
 
     public static TeamInHeadToHeadModus getTeamInHeadToHeadModus(NifsTeam nifsTeam) {
         return new TeamInHeadToHeadModus(
-                Integer.toString(nifsTeam.getId()),
+                nifsTeam.getId(),
                 nifsTeam.getName(),
                 nifsTeam.getUrl(),
                 nifsTeam.getWonHome(),
@@ -52,7 +52,7 @@ public class NifsTeamTranslator {
 
     public static TeamInTableModus getTeamInTableModus(NifsTeam nifsTeam) {
         return new TeamInTableModus(
-                Integer.toString(nifsTeam.getId()),
+                nifsTeam.getId(),
                 nifsTeam.getName(),
                 nifsTeam.getUrl(),
                 nifsTeam.getPlace(),

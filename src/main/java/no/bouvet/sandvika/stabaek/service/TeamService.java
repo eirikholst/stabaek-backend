@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TeamService implements ClearableService{
+
     @Autowired
     private TeamRepository teamRepository;
 

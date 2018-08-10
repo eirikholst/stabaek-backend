@@ -17,11 +17,11 @@ public class NifsPlayerTranslator {
                 .findFirst().orElse(clubTeam)
                 .getShirtNumber();
         return new Player(
-                Integer.toString(nifsPerson.getId()),
+                nifsPerson.getId(),
                 nifsPerson.getFirstName(),
                 nifsPerson.getLastName(),
                 nifsPerson.getPosition().getPosition(),
-                Integer.toString(clubTeam.getId()),
+                clubTeam.getId(),
                 shirtNumber,
                 profilePictureUrl,
                 NifsTransferTranslator.getTransfers(nifsPerson.getTransfers()),
