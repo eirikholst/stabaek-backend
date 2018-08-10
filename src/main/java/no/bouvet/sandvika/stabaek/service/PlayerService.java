@@ -7,7 +7,6 @@ import no.bouvet.sandvika.stabaek.repository.PlayerRepository;
 import no.bouvet.sandvika.stabaek.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,7 +21,6 @@ public class PlayerService implements ClearableService{
     @Autowired
     private TeamRepository teamRepository;
 
-    @Transactional
     public List<Player> getAllPlayers(){
         List<Player> players = new ArrayList<>();
         for (Player player : playerRepository.findAll())
@@ -30,28 +28,39 @@ public class PlayerService implements ClearableService{
         return players;
     }
 
-    @Transactional
     public void addPlayer(Player player) {
         this.playerRepository.save(player);
     }
 
-    @Transactional
     public Player getPlayer(String id) {
+        try {
+            return getPlayer(Integer.parseInt(id));
+        } catch (NumberFormatException ex) {
+            return null;
+        }
+    }
+
+    public Player getPlayer(int id) {
         return playerRepository.findById(id).orElse(null);
     }
 
-    @Transactional
     public List<Player> getPlayersFromTeam(String id) {
+        try {
+            return getPlayersFromTeam(Integer.parseInt(id));
+        } catch (NumberFormatException ex) {
+            return new ArrayList<>();
+        }
+    }
+
+    public List<Player> getPlayersFromTeam(int id) {
         Team team = teamRepository.findById(id).orElse(null);
         return new ArrayList<>(team != null ? team.getPlayers() : new ArrayList<>());
     }
 
-    @Transactional
     public void clearDb() {
         this.playerRepository.deleteAll();
     }
 
-    @Transactional
     public List<PlayerStatistics> getPlayersStatistics(int playerId, String stageId, boolean omitZeros) {
         return getAllPlayers().stream()
                 .filter(player -> playerId == -1 || player.getId() == playerId)

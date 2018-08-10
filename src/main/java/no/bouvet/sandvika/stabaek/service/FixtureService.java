@@ -51,6 +51,14 @@ public class FixtureService implements ClearableService{
     }
 
     public Fixture getFixture(String id) {
+        try {
+            return getFixture(Integer.parseInt(id));
+        } catch (NumberFormatException ex) {
+            return null;
+        }
+    }
+
+    public Fixture getFixture(int id) {
         return fixtureRepository.findById(id).orElse(null);
     }
 
